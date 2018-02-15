@@ -1,0 +1,76 @@
+{% set output_file_parts = output_file.split('/') %}
+{% set sub_site = 'main' %}
+{% set sub_parts = (output_file_parts | length) - 1 %}
+{% if output_file_parts | length > 1 %}
+    {% set sub_site = output_file_parts[0] %}
+    {% set subsub_site = output_file_parts[-2] %}
+{% endif %}
+{% if sub_site %}
+    {% if sub_site in THEME_SITECOLORS and 'tint' in THEME_SITECOLORS[sub_site] %}
+        {% set background_tint = THEME_SITECOLORS[sub_site]["tint"] %}
+    {% else %}
+        {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
+    {% endif %}
+    {% if sub_site in THEME_SITECOLORS and 'overlay' in THEME_SITECOLORS[sub_site] %}
+        {% set overlay_tint = THEME_SITECOLORS[sub_site]["overlay"] %}
+    {% else %}
+        {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
+    {% endif %}
+{% else %}
+    {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
+    {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
+{% endif %}
+{% if page.headerimage %}
+    {% set header_image = page.headerimage %}
+    {% set header_image_cc = page.headerimagecc %}
+    {% if 'theme::' in header_image %}
+        {% set header_image = header_image.split('::')[1] %}
+        {% set header_image = '../' * sub_parts + 'theme/images/'+header_image %}
+        {% if 'everyday-patterns' in header_image %}
+            {% set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' %}
+        {% endif %}
+    {% else %}
+        {% set header_image = '../' * sub_parts + '/' +header_image %}
+    {% endif %}
+{% endif %}
+{% if page.headeroverlay %}
+    {% set header_overlay = page.headeroverlay %}
+    {% if 'theme::' in header_overlay %}
+        {% set header_overlay = header_overlay.split('::')[1] %}
+        {% set header_overlay = '../' * sub_parts + 'theme/images/'+header_overlay %}
+    {% else %}
+        {% set header_overlay = '../' * sub_parts + '/' +header_overlay %}
+    {% endif %}
+{% endif %}
+{% set overlay_css = 'box-shadow: 0px 1000px '+overlay_tint+' inset;' %}
+<header class="page-top" {% if header_image %}style="background-image: url({{header_image}});box-shadow: 0px 1000px {{background_tint}} inset;overflow:hidden;position:relative"{% endif %}>
+    <div class="container" style="{{overlay_css}}">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="page-heading {{pageheadingclass}}">
+                    <div class="pull-right">
+                    {% if '.svg' in header_overlay %}
+                        <object class="img img-responsive sr-header-overlay" type="image/svg+xml" data="{{header_overlay}}"></object>
+                    {% else %}
+                        <img class="img img-responsive sr-header-overlay" src="{{header_overlay}}">
+                    {% endif %}
+                    </div>
+                    <h1>{{page.title}}</h1>
+                    {% if page.headertext %}
+                    {% if not page.headertextsecondary %}
+                    <hr class="small">
+                    {% endif %}
+                    <span class="subheading">{{page.headertext}}</span>
+                    {% endif %}
+                    {% if page.headertextsecondary %}
+                    <hr class="small">
+                    <span class="subheading subheading-secondary">{{page.headertextsecondary}}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if header_image_cc %}
+    <span class="header-cc-logo" data-toggle="tooltip" data-placement="top" title="{{header_image_cc}}"><i class="fa fa-creative-commons" aria-hidden="true"></i></span>
+    {% endif %}
+</header>

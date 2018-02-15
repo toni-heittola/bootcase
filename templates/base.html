@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}{{ DEFAULT_LANG }}{% endblock %}">
+<head>
+    <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if FAVICON %}
+    <link href="{{ SITEURL }}/{{ FAVICON }}" rel="icon">
+    {% endif %}
+    {% if FAVICON_IE %}
+    <!--[if IE]><link rel="shortcut icon" href="{{ SITEURL }}/{{ FAVICON_IE }}"><![endif]-->
+    {% endif %}
+    {% if TOUCHICON %}
+    <link rel="apple-touch-icon" href="{{ SITEURL }}/{{ TOUCHICON }}">
+    {% endif %}
+    {% block canonical_rel %}{% endblock %}
+    {% block meta %}
+    <meta name="author" content="{{ AUTHOR }}" />
+    {% endblock %}
+    {% if THEME_BOOTSTRAP_THEME %}
+    <link href="{{ SITEURL }}/theme/assets/bootstrap/css/bootstrap.{{ THEME_BOOTSTRAP_THEME }}.min.css" rel="stylesheet" type="text/css"/>
+    {% else %}
+    <link href="{{ SITEURL }}/theme/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    <link href="{{ SITEURL }}/theme/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    {% if 'academicons' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['academicons'] %}
+    <link href="{{ SITEURL }}/theme/assets/academicons/css/academicons.min.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    {% if 'colorbox' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['colorbox'] %}
+    <link href="{{ SITEURL }}/theme/assets/colorbox/css/colorbox.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    <link href="{{ SITEURL }}/theme/css/pygments/{{ PYGMENTS_STYLE|default('native') }}.css" rel="stylesheet" type="text/css"/>
+    {% if DOCUTIL_CSS %}
+    <link href="{{ SITEURL }}/theme/css/html4css1.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    {% if TYPOGRIFY %}
+    <link href="{{ SITEURL }}/theme/css/typogrify.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    {% if 'fullpage' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['fullpage'] %}
+    <link href="{{ SITEURL }}/theme/assets/fullpage/jquery.fullpage.min.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    {% if THEME_GOOGLE_FONTS %}
+    <link href="{{THEME_GOOGLE_FONTS}}" rel="stylesheet">
+    {% endif %}
+{% if article %}
+    {% if article.styles %}
+        {% for style in article.styles %}
+    {{ style }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+{% if page %}
+    {% if page.styles %}
+        {% for style in page.styles %}
+    {{ style }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+    <link href="{{ SITEURL }}/theme/css/theme.css" rel="stylesheet" type="text/css"/>
+    {% if CUSTOM_CSS %}
+    <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet" type="text/css"/>
+    {% endif %}
+    {% if FEED_ALL_ATOM %}
+    <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
+    {% endif %}
+    {% if FEED_ALL_RSS %}
+    <link href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed"/>
+    {% endif %}
+</head>
+<body>
+{% set output_file_parts = output_file.split('/') %}
+{% set sub_site = 'main' %}
+{% if output_file_parts | length > 1 %}
+    {% set sub_site = output_file_parts[0] %}
+{% endif %}
+{% include 'includes/top_menu.html' %}
+{% block breadcrumbs %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% include 'includes/footer.html' %}
+<script src="{{ SITEURL }}/theme/assets/jquery/jquery.min.js"></script>
+{% if 'colorbox' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['colorbox'] %}
+<script src="{{ SITEURL }}/theme/assets/colorbox/js/jquery.colorbox-min.js"></script>
+<script src="{{ SITEURL }}/theme/js/setup.colorbox.js"></script>
+{% endif %}
+<script src="{{ SITEURL }}/theme/assets/jquery/jquery.easing.min.js"></script>
+<script src="{{ SITEURL }}/theme/assets/bootstrap/js/bootstrap.min.js"></script>
+{% if 'scrollreveal' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['scrollreveal'] %}
+<script src="{{ SITEURL }}/theme/assets/scrollreveal/scrollreveal.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/setup.scrollreveal.js"></script>
+{% endif %}
+{% if 'anijs' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['anijs'] %}
+<script src="{{ SITEURL }}/theme/assets/anijs/anijs.min.js"></script>
+{% endif %}
+{% if 'fullpage' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['fullpage'] %}
+<script src="{{ SITEURL }}/theme/assets/fullpage/scrolloverflow.min.js"></script>
+<script src="{{ SITEURL }}/theme/assets/fullpage/jquery.fullpage.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/setup.fullpage.js"></script>
+{% endif %}
+{% if 'timeago' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['timeago'] %}
+<script src="{{ SITEURL }}/theme/assets/timeago/timeago.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/setup.timeago.js"></script>
+{% endif %}
+{% if 'audio' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['audio'] %}
+<script src="{{ SITEURL }}/theme/assets/audio/js/audio.min.js"></script>
+<script src="{{ SITEURL }}/theme/js/setup.audio.js"></script>
+{% endif %}
+<script src="{{ SITEURL }}/theme/js/respond.min.js"></script>
+{% if article %}
+    {% if article.scripts %}
+        {% for script in article.scripts %}
+{{ script }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+{% if page %}
+    {% if page.scripts %}
+        {% for script in page.scripts %}
+{{ script }}
+        {% endfor %}
+    {% endif %}
+{% endif %}
+<script src="{{ SITEURL }}/theme/js/site.js"></script>
+{% include 'includes/google_analytics.html' %}
+</body>
+</html>

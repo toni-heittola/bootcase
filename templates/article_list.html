@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+{% set output_file_parts = output_file.split('/') %}
+{% set sub_parts = (output_file_parts | length) - 1 %}
+{% set header_image = THEME_ARTICLE_LIST_HEADER_BG %}
+{% if 'theme::' in header_image %}
+    {% set header_image = header_image.split('::')[1] %}
+    {% set header_image = '../' * sub_parts + 'theme/images/'+header_image %}
+    {% if 'everyday-patterns' in header_image %}
+        {% set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' %}
+    {% endif %}
+{% else %}
+    {% set header_image = '../' * sub_parts + '/' +header_image %}
+{% endif %}
+<header class="article-top" style="background-image: url({{header_image}});box-shadow: 0px 1000px rgba(0, 0, 0, 0.5) inset;overflow:hidden;position:relative;">
+    <div class="container" style="height:100%;">
+        <div class="row" style="height:100%;">
+            <div class="col-md-offset-2 col-md-8 b20" style="height:100%;">
+                <div class="page-heading" style="height:100%;">
+                    <h2>News articles</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if header_image_cc %}
+    <span class="header-cc-logo" data-toggle="tooltip" data-placement="top" title="{{header_image_cc}}"><i class="fa fa-creative-commons" aria-hidden="true"></i></span>
+    {% endif %}
+</header>
+<div class="container">
+    {% if articles %}
+        {% for article in (articles_page.object_list if articles_page else articles) %}
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8" style="min-height:100%;padding-left:0px;padding-right:0px;margin-top:10px;margin-bottom:20px;">
+                <article>
+                    {% set category_data = THEME_ARTICLE_CATEGORIES[article.category] %}
+                    <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+                    {% if DISPLAY_ARTICLE_INFO_ON_INDEX %}
+                    <div>
+                        <div class="text-muted2 pull-left">
+                            <small>
+                                <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>,
+                                <em><strong>{{ article.author }}</strong></em>
+                            </small>
+                        </div>
+                        <div class="text-muted2 pull-right">
+                            <small>
+                            {% if category_data and 'label-css' in category_data %}
+                            <span class="{{category_data['label-css']}}">
+                            {% else %}
+                            <span class="label label-default">
+                            {% endif %}
+                                {{ article.category }}
+                            </span>
+                            </small>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="article-summary">
+                        {{ article.summary }}
+                        <a class="btn btn-default btn-xs" href="{{ SITEURL }}/{{ article.url }}">More ...</a>
+                    </div>
+                </article>
+                <hr/>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% include 'includes/pagination.html' %}
+</div>
+{% endblock content %}
+

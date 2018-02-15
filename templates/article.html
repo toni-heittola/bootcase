@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title|striptags }} - {{ SITENAME }}{% endblock %}
+{% block html_lang %}{{ article.lang }}{% endblock %}
+{% block meta %}
+    {% if article.author %}
+        <meta name="author" content="{{ article.author }}" />
+    {% else %}
+        <meta name="author" content="{{ AUTHOR }}" />
+    {% endif %}
+    {% if article.tags %}
+        <meta name="keywords" content="{{ article.tags|join(',')|striptags }}" />
+    {% endif %}
+    {% if article.summary %}
+        <meta name="description" content="{{ article.summary|striptags|escape }}" />
+    {% endif %}
+{% endblock %}
+{% block canonical_rel %}
+<link rel="canonical" href="{{ SITEURL }}/{{ article.url }}">
+{% endblock %}
+{% block breadcrumbs %}
+    {% if DISPLAY_BREADCRUMBS %}
+        {% if DISPLAY_CATEGORY_IN_BREADCRUMBS %}
+            <ol class="breadcrumb">
+                <li><a href="{{ SITEURL }}" title="{{ SITENAME }}"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="{{ SITEURL }}/{{ article.category.url }}" title="{{ article.category }}">{{ article.category }}</a></li>
+                <li class="active">{{ article.title }}</li>
+            </ol>
+        {% else %}
+            <ol class="breadcrumb">
+                <li><a href="{{ SITEURL }}" title="{{ SITENAME }}"><i class="fa fa-home fa-lg"></i></a></li>
+                <li class="active">{{ article.title }}</li>
+            </ol>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if article.toc %}
+        {{ article.toc }}
+    {% endif %}
+    {% include 'includes/article_header.html' %}
+    <section id="content" class="article-rest">
+        <article style="height:100%;">
+            <div class="container" style="height:100%;">
+                <div class="row" style="height:100%;">
+                    <div class="col-md-offset-2 col-md-8 gradient1r entry-content" style="min-height:100%;padding-top:10px;">
+                        {{ article.content }}
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock %}

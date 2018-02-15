@@ -1,0 +1,44 @@
+{% extends "article.html" %}
+{% block content %}
+    {% if article.toc %}
+        {{ article.toc }}
+    {% endif %}
+    {% include 'includes/article_header.html' %}
+    <section id="content" class="article-rest">
+        <article style="height:100%;">
+            {% if article.papertitle %}
+            <div class="panel panel-default publication-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Publication info</h3>
+				</div>
+				<div class="panel-body">
+					<h3>{{article.papertitle}}</h3>
+                    {% if article.paperauthors %}
+					<p><em>{{article.paperauthors}}</em></p>
+                    {% endif %}
+                    {% if article.paperinfo %}
+					<p>{{article.paperinfo}}</p>
+                    {% endif %}
+                    {% if article.paperurl or article.paperpdf %}
+					<div class="btn-group">
+                        {% if article.paperkey %}
+	    				<a class="btn btn-success" data-placement="bottom" title="Reference" rel="tooltip" href="{{article.paperurl}}"><i class="fa fa-file-text-o fa-1x"></i> Reference</a>
+                        {% endif %}
+                        {% if article.paperpdf %}
+	    				<a class="btn btn-warning" data-placement="bottom" title="Download pdf" rel="tooltip" href="{{article.paperpdf}}"><i class="fa fa-file-pdf-o fa-1x"></i> PDF</a>
+                         {% endif %}
+					</div>
+                    {% endif %}
+				</div>
+			</div>
+            {% endif %}
+            <div class="container" style="height:100%;">
+                <div class="row" style="height:100%;">
+                    <div class="col-md-offset-2 col-md-8 gradient1r entry-content" style="min-height:100%;padding-top:10px;">
+                        {{ article.content }}
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} - {{ SITENAME }}{% endblock %}
+{% block html_lang %}{{ page.lang }}{% endblock %}
+{% block meta %}
+    {% if page.author %}
+        <meta name="author" content="{{ page.author }}" />
+    {% else %}
+        <meta name="author" content="{{ AUTHOR }}" />
+    {% endif %}
+    {% if page.summary %}
+        <meta name="description" content="{{ page.summary|striptags|escape }}" />
+    {% endif %}
+{% endblock %}
+{% block canonical_rel %}
+<link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
+{% endblock %}
+{% block breadcrumbs %}
+    {% if DISPLAY_BREADCRUMBS %}
+    <ol class="breadcrumb">
+        <li><a href="{{ SITEURL }}" title="{{ SITENAME }}"><i class="fa fa-home fa-lg"></i></a></li>
+	  {% if page.url %}
+        <li class="active">{{ page.title }}</li>
+	  {% endif %}
+    </ol>
+    {% endif %}
+{% endblock %}
+{% block content %}
+{% include 'includes/page_header.html' %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 sidecolumn-left">
+        {% include 'includes/page_sidebar.html' %}
+        </div>
+        <div class="col-sm-9 content">
+            <section id="content" class="body">
+                <div class="entry-content">
+                    {{ page.content }}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>    
+{% endblock %}
+
