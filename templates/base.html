@@ -18,12 +18,17 @@
     {% block meta %}
     <meta name="author" content="{{ AUTHOR }}" />
     {% endblock %}
+    {% if THEME_GOOGLE_FONTS %}
+    <link href="{{THEME_GOOGLE_FONTS}}" rel="stylesheet">
+    {% endif %}
     {% if THEME_BOOTSTRAP_THEME %}
     <link href="{{ SITEURL }}/theme/assets/bootstrap/css/bootstrap.{{ THEME_BOOTSTRAP_THEME }}.min.css" rel="stylesheet" type="text/css"/>
     {% else %}
     <link href="{{ SITEURL }}/theme/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     {% endif %}
+    {% if 'fontawesome' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['fontawesome'] %}
     <link href="{{ SITEURL }}/theme/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
     {% if 'academicons' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['academicons'] %}
     <link href="{{ SITEURL }}/theme/assets/academicons/css/academicons.min.css" rel="stylesheet" type="text/css"/>
     {% endif %}
@@ -40,9 +45,6 @@
     {% if 'fullpage' in THEME_INCLUDED_ASSETS and THEME_INCLUDED_ASSETS['fullpage'] %}
     <link href="{{ SITEURL }}/theme/assets/fullpage/jquery.fullpage.min.css" rel="stylesheet" type="text/css"/>
     {% endif %}
-    {% if THEME_GOOGLE_FONTS %}
-    <link href="{{THEME_GOOGLE_FONTS}}" rel="stylesheet">
-    {% endif %}
 {% if article %}
     {% if article.styles %}
         {% for style in article.styles %}
@@ -58,8 +60,8 @@
     {% endif %}
 {% endif %}
     <link href="{{ SITEURL }}/theme/css/theme.css" rel="stylesheet" type="text/css"/>
-    {% if CUSTOM_CSS %}
-    <link href="{{ SITEURL }}/{{ CUSTOM_CSS }}" rel="stylesheet" type="text/css"/>
+    {% if THEME_CUSTOM_CSS %}
+    <link href="{{ SITEURL }}/{{ THEME_CUSTOM_CSS }}" rel="stylesheet" type="text/css"/>
     {% endif %}
     {% if FEED_ALL_ATOM %}
     <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
