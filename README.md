@@ -39,6 +39,7 @@ One can use alternative bootstrap theme by setting `THEME_BOOTSTRAP_THEME` to co
 To control which assets are included in the theme, edit `pelicanconf.py`:
 
     THEME_INCLUDED_ASSETS = {
+        'fontawesome': True, 
         'colorbox': False,
         'audio': False,
         'timeago': False,
