@@ -118,7 +118,6 @@ Theme default settings are specified in `theme.defaults.yaml`:
         header_overlay_tint: rgba(255, 255, 255, 0.1)
 
 
-
 ## Site settings
 
 Set in `THEME_SETTINGS['site']`:
