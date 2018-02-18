@@ -165,12 +165,14 @@ Menus are set using list of *menu dictionary items*. Menu item is a dictionary w
 | url               | string        | Menu item url.                                                                    | 
 | logo              | bool          | Item only with a logo image.                                                      |
 | img               | string        | Path to the image for logo item.                                                  |
-| title             | string        | Menu item title                                                                   |
+| title             | string        | Menu item title. If no url is set, and title is set, menu header is inserted.     |
 | sub_site_fetching | string        | Alternative sub-path used to activate the menu item. For example, if article list is mapped at /news, and articles are under articles/ sub-path, this parameter can be used to activate correct menu item when article is open    |
 | dropdown          | list of menu items | Sub-menu.                                                                    |
+| divider           | bool          | When true, only menu divider is inserted.                                         |
 | tooltip           | bool          | Add tooltip for the menu item.                                                    |
 | tooltip_text      | string        | Tooltip text.                                                                     |
 | tooltip_placement | string        | Tooltip placement, see [Bootstrap documentation for more](https://getbootstrap.com/docs/3.3/javascript/#tooltips).  |
+
 
 `THEME_SETTINGS['menu']['top_left']` and `THEME_SETTINGS['menu']['top_right']` menus are set up with a list of menu items. 
 Sub-site menu, `THEME_SETTINGS['menu']['sub']` is set up with a dictionary containing list of menu items. This dictionary is having sub-site labels as keys. For example, for `subsite_a/test.html` the sub-site label is `subsite_a`.
