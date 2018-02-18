@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-{% set output_file_parts = output_file.split('/') %}
-{% set sub_parts = (output_file_parts | length) - 1 %}
-{% set header_image = THEME_ARTICLE_LIST_HEADER_BG %}
-{% if 'theme::' in header_image %}
-    {% set header_image = header_image.split('::')[1] %}
-    {% set header_image = '../' * sub_parts + 'theme/images/'+header_image %}
-    {% if 'everyday-patterns' in header_image %}
-        {% set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' %}
-    {% endif %}
-{% else %}
-    {% set header_image = '../' * sub_parts + '/' +header_image %}
-{% endif %}
+{%- if 'header_defaults' in THEME_SETTINGS and 'article_list_background_image' in THEME_SETTINGS['header_defaults'] -%}
+    {%- set header_image = THEME_SETTINGS['header_defaults']['article_list_background_image'] -%}
+{%- endif -%}
+
+{%- if header_image -%}
+    {%- if 'theme::' in header_image -%}
+        {%- set header_image = header_image.split('::')[1] -%}
+        {%- set header_image = '../' * sub_parts + 'theme/images/'+header_image -%}
+        {%- if 'everyday-patterns' in header_image -%}
+            {%- set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' -%}
+        {%- endif -%}
+
+    {%- else -%}
+        {%- set header_image = '../' * sub_parts + '/' +header_image -%}
+    {%- endif -%}
+{%- endif -%}
+
 <header class="article-top" style="background-image: url({{header_image}});box-shadow: 0px 1000px rgba(0, 0, 0, 0.5) inset;overflow:hidden;position:relative;">
     <div class="container" style="height:100%;">
         <div class="row" style="height:100%;">
@@ -28,24 +33,33 @@
 </header>
 <div class="container">
     {% if articles %}
-        {% for article in (articles_page.object_list if articles_page else articles) %}
+        {%- for article in (articles_page.object_list if articles_page else articles) -%}
+            {%- if 'article_categories' in THEME_SETTINGS and THEME_SETTINGS['article_categories'] and article.category|string() in THEME_SETTINGS['article_categories'] -%}
+                {%- set category_data = THEME_SETTINGS['article_categories'][article.category|string()] -%}
+            {%- elif 'page_substyles' in THEME_SETTINGS and sub_site and sub_site|string() in THEME_SETTINGS['page_substyles'] -%}
+                {%- set category_data = THEME_SETTINGS['page_substyles'][sub_site|string()] -%}
+            {%- elif 'page_substyles' in THEME_SETTINGS and 'default' in THEME_SETTINGS['page_substyles'] -%}
+                {%- set category_data = THEME_SETTINGS['page_substyles']['default'] -%}
+            {%- endif -%}
         <div class="row">
             <div class="col-md-offset-2 col-md-8" style="min-height:100%;padding-left:0px;padding-right:0px;margin-top:10px;margin-bottom:20px;">
                 <article>
-                    {% set category_data = THEME_ARTICLE_CATEGORIES[article.category] %}
                     <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
                     {% if DISPLAY_ARTICLE_INFO_ON_INDEX %}
                     <div>
                         <div class="text-muted2 pull-left">
                             <small>
-                                <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>,
-                                <em><strong>{{ article.author }}</strong></em>
+                                <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>
+                                {%- if 'article' in THEME_SETTINGS and 'show_author' in THEME_SETTINGS['article'] and THEME_SETTINGS['article']['show_author'] -%}
+                                , <em><strong>{{ article.author }}</strong></em>
+                                {% endif -%}
                             </small>
                         </div>
+                        {%- if 'article' in THEME_SETTINGS and 'show_category' in THEME_SETTINGS['article'] and THEME_SETTINGS['article']['show_category'] -%}
                         <div class="text-muted2 pull-right">
                             <small>
-                            {% if category_data and 'label-css' in category_data %}
-                            <span class="{{category_data['label-css']}}">
+                            {% if category_data and 'label_css' in category_data %}
+                            <span class="{{category_data['label_css']}}">
                             {% else %}
                             <span class="label label-default">
                             {% endif %}
@@ -53,6 +67,7 @@
                             </span>
                             </small>
                         </div>
+                        {% endif %}
                     </div>
                     {% endif %}
                     <div class="article-summary">

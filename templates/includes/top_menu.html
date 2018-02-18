@@ -1,4 +1,5 @@
 {% block nav %}
+{% set current_page = output_file|replace(".html","") | replace("index","") %}
 <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="195">
     <div class="container">
         <div class="row">
@@ -10,70 +11,33 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="{{ SITEURL }}/" class="navbar-brand hidden-lg hidden-md hidden-sm" >
-                    {% if SITELOGO %}<img src="{{ SITEURL }}/{{ SITELOGO }}" width="{{ SITELOGO_SIZE }}"/> {% endif %}
-                    {% if not THEME_HIDE_SITENAME %}{{ SITENAME }}{% endif %}
+                    {%- if 'site' in  THEME_SETTINGS and 'show_logo' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['show_logo'] -%}
+                    <img src="{{ SITEURL }}/{{ SITELOGO }}"/>
+                    {%- endif -%}
+                    {%- if 'site' in  THEME_SETTINGS and 'show_name' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['show_name'] -%}
+                    {{ SITENAME }}
+                    {%- endif -%}
                 </a>
             </div>
             <div id="navbar-main" class="navbar-collapse collapse">
+                {%- if 'menu' in THEME_SETTINGS and 'top_left' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['top_left'] is iterable -%}
                 <ul class="nav navbar-nav" id="menuitem-list-main">
-                {% for url, logo, external in THEME_MENUITEMS_LOGO %}
-                    {% if url is string %}
-                    <li {% if url == output_file|replace(".html","")|replace("index","") %}class="active"{% endif %}>
-                        {% if external %}
-                        <a target="_self" href="{{ url }}"><img src="{{ logo }}"/></a>
-                        {% else %}
-                        <a href="{{ SITEURL }}/{{ url }}"><img src="{{ logo }}"/></a>
-                        {% endif %}
-                    </li>
-                    {% endif %}
-                {% endfor %}
+                {%- for menu_dict in THEME_SETTINGS['menu']['top_left'] -%}
+                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) -}}
+                {%- endfor -%}
                 </ul>
+                {%- endif %}
+
+                {%- if 'menu' in THEME_SETTINGS and 'top_right' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['top_right'] is iterable -%}
                 <ul class="nav navbar-nav navbar-right" id="menuitem-list">
-                {% for title,url,icon, external in THEME_MENUITEMS_MAIN %}
-                    {% if url is string %}
-                    {% if title != 'Search' %}
-                    <li {% if url == output_file|replace(".html","")|replace("index","") %}class="active"{% endif %}>
-                        {% if external %}
-                        <a target="_self" href="{{ url }}">{% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{ title }}</a>
-                        {% else %}
-                        <a href="{{ SITEURL }}/{{ url }}">{% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{ title }}</a>
-                        {% endif %}
-                    </li>
-                    {% endif %}
-                    {% elif url is iterable %}
-                    <li class="btn-group
-                        {%- for title,item_url,item_icon,external in url -%}
-                        {%- if item_url == output_file|replace(".html","") -%}
-                        {{- ' active' -}}
-                        {%- endif -%}
-                        {%- endfor -%}
-                        ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            {% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{- title }}&nbsp;<b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            {% for title,item_url,item_icon,external in url %}
-                                {% if title and item_url and item_icon %}
-                                <li {% if item_url == output_file|replace(".html","") %}class="active"{% endif %}>
-                                    {% if external %}
-                                    <a href="{{ item_url }}">{% if item_icon %}<i class="{{ item_icon }}"></i>{% endif%}{% if title %}&nbsp;&nbsp;{{ title }}{% endif %}</a>
-                                    {% else %}
-                                    <a href="{{ SITEURL }}/{{ item_url }}">{% if item_icon %}<i class="{{ item_icon }}"></i>{% endif%}{% if title %}&nbsp;&nbsp;{{ title }}{% endif %}</a>
-                                    {% endif %}
-                                </li>
-                                {% elif title and not item_url %}
-                                <li class="dropdown-header"><i class="{{ item_icon }}"></i> <strong>{{ title }}</strong></li>
-                                {% else %}
-                                <li role="presentation" class="divider"></li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    {% endif %}
-                {% endfor %}
+                {%- for menu_dict in THEME_SETTINGS['menu']['top_right'] -%}
+                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) -}}
+                {%- endfor %}
                 </ul>
+                {%- endif %}
             </div>
         </div>
+        {%- if (article and article.pageanchors) or (page and page.pageanchors) %}
         <div class="row">
             <div id="navbar-page-pub" class="navbar-collapse collapse">
             {% if article %}
@@ -99,56 +63,18 @@
             {% endif %}
             </div>
         </div>
-        {% if sub_site in THEME_MENUITEMS_SUB %}
-        <div class="row">
-            <div id="navbar-sub" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" id="menuitem-list-sub">
-                    {% for title, url, icon, external in THEME_MENUITEMS_SUB[sub_site] %}
-                        {% if url is string %}
-                            {% if title != 'Search' %}
-                                <li {% if url == output_file|replace(".html","")|replace("index","") %}class="active"{% endif %}>
-                                    {% if external %}
-                                    <a target="_self" href="{{ url }}">{% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{ title }}</a>
-                                    {% else %}
-                                    <a href="{{ SITEURL }}/{{ url }}">{% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{ title }}</a>
-                                    {% endif %}
-                                </li>
-                            {% endif %}
-                            {% elif url is iterable %}
-                                <li class="btn-group
-                                {%- for title,item_url,item_icon,external in url -%}
-                                {%- if item_url == output_file|replace(".html","") -%}
-                                {{- ' active' -}}
-                                {%- endif -%}
-                                {%- endfor -%}
-                                ">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    {% if icon %}<i class="{{ icon }}"></i>&nbsp;{% endif%}{{- title }}&nbsp;<b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                {% for title,item_url,item_icon,external in url %}
-                                    {% if title and item_url and item_icon %}
-                                        <li {% if item_url == output_file|replace(".html","") %}class="active"{% endif %}>
-                                            {% if external %}
-                                            <a href="{{ item_url }}">{% if item_icon %}<i class="{{ item_icon }}"></i>{% endif%}{% if title %}&nbsp;&nbsp;{{ title }}{% endif %}</a>
-                                            {% else %}
-                                            <a href="{{ SITEURL }}/{{ item_url }}">{% if item_icon %}<i class="{{ item_icon }}"></i>{% endif%}{% if title %}&nbsp;&nbsp;{{ title }}{% endif %}</a>
-                                            {% endif %}
-                                        </li>
-                                    {% elif title and not item_url %}
-                                        <li class="dropdown-header"><i class="{{ item_icon }}"></i> <strong>{{ title }}</strong></li>
-                                    {% else %}
-                                        <li role="presentation" class="divider"></li>
-                                    {% endif %}
-                                {% endfor %}
-                                </ul>
-                                </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
         {% endif %}
+        {%- if 'menu' in THEME_SETTINGS and 'sub' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['sub'] and sub_site in THEME_SETTINGS['menu']['sub'] -%}
+        <div class="row">
+             <div id="navbar-sub" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right" id="menuitem-list-sub">
+                {%- for menu_dict in THEME_SETTINGS['menu']['sub'][sub_site] -%}
+                {{ macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) }}
+                {%- endfor -%}
+                </ul>
+             </div>
+        </div>
+        {%- endif -%}
     </div>
 </nav>
 {% endblock %}

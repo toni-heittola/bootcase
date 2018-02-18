@@ -1,0 +1,64 @@
+# Site settings
+site:
+  show_name: false
+  show_logo: true
+  favicon: false
+  favicon_ie: false
+  apple_touch_icon: false
+
+# Assets settings
+assets:
+  fontawesome: true
+  colorbox: false
+  audio: false
+  timeago: false
+  fulpage: false
+  scrollreveal: true
+  anijs: false
+  pygments: false
+
+# Bootstrap settings
+bootstrap-theme: false
+
+# Misc settings
+web_fonts: https://fonts.googleapis.com/css?family=Heebo:900
+google_analytics_tracking_id: false
+custom_css: false
+
+# Menu settings
+menu:
+  top_left:
+  top_right:
+  sub:
+
+# Footer settings
+footer:
+  show: true
+
+# Header defaults
+header_defaults:
+  article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+  article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+  page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+
+# Article info settings
+article:
+  show_author: true
+  show_category: true
+
+# Article category specific style settings
+article_categories:
+
+# Page style settings, accessed based on sub site label
+page_substyles:
+  default:
+    header_bg_tint: rgba(0, 0, 0, 0.65)
+    header_overlay_tint: rgba(255, 255, 255, 0.1)
+
+  main:
+    header_bg_tint: rgba(0, 0, 0, 0.85)
+    header_overlay_tint': rgba(255, 255, 255, 0.1)
+
+  articles:
+    header_bg_tint: rgba(0, 0, 0, 0.85)
+    header_overlay_tint: rgba(255, 255, 255, 0.1)

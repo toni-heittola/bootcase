@@ -1,28 +1,34 @@
-{% set output_file_parts = output_file.split('/') %}
-{% set sub_site = 'main' %}
-{% set sub_parts = (output_file_parts | length) - 1 %}
-{% if output_file_parts | length > 1 %}
-    {% set sub_site = output_file_parts[0] %}
-    {% set subsub_site = output_file_parts[-2] %}
-{% endif %}
-{% if sub_site %}
-    {% if sub_site in THEME_SITECOLORS and 'tint' in THEME_SITECOLORS[sub_site] %}
-        {% set background_tint = THEME_SITECOLORS[sub_site]["tint"] %}
-    {% else %}
-        {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
-    {% endif %}
-    {% if sub_site in THEME_SITECOLORS and 'overlay' in THEME_SITECOLORS[sub_site] %}
-        {% set overlay_tint = THEME_SITECOLORS[sub_site]["overlay"] %}
-    {% else %}
-        {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
-    {% endif %}
-{% else %}
-    {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
-    {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
-{% endif %}
-{% if page.headerimage %}
+{%- if 'page_substyles' in THEME_SETTINGS and sub_site|string() in THEME_SETTINGS['page_substyles'] -%}
+    {% set page_data = THEME_SETTINGS['page_substyles'][sub_site|string()] %}
+{%- elif 'page_substyles' in THEME_SETTINGS and 'default' in THEME_SETTINGS['page_substyles'] -%}
+    {% set page_data = THEME_SETTINGS['page_substyles']['default'] %}
+{%- endif -%}
+{%- if 'header_bg_tint' in page_data -%}
+    {% set header_bg_tint = page_data['header_bg_tint'] %}
+{%- else -%}
+    {% set header_bg_tint = 'rgba(0, 0, 0, 0.65)' %}
+{%- endif -%}
+
+{%- if 'header_overlay_tint' in page_data -%}
+    {% set header_overlay_tint = page_data['header_overlay_tint'] %}
+{%- else -%}
+    {% set header_overlay_tint = 'rgba(255, 255, 255, 0.1)' %}
+{%- endif -%}
+
+{%- if page.headerimage -%}
     {% set header_image = page.headerimage %}
     {% set header_image_cc = page.headerimagecc %}
+
+{%- elif page_data and 'header_image' in page_data -%}
+    {%- set header_image = page_data['header_image'] -%}
+    {%- if 'header_image_cc' in page_data -%}
+        {%- set header_image_cc = page_data['header_image_cc'] -%}
+    {%- endif -%}
+{%- elif 'header_defaults' in THEME_SETTINGS and 'page_background_image' in THEME_SETTINGS['header_defaults'] -%}
+    {% set header_image = THEME_SETTINGS['header_defaults']['page_background_image'] %}
+{%- endif -%}
+
+{%- if header_image -%}
     {% if 'theme::' in header_image %}
         {% set header_image = header_image.split('::')[1] %}
         {% set header_image = '../' * sub_parts + 'theme/images/'+header_image %}
@@ -32,9 +38,17 @@
     {% else %}
         {% set header_image = '../' * sub_parts + '/' +header_image %}
     {% endif %}
-{% endif %}
-{% if page.headeroverlay %}
+{%- endif -%}
+
+{%- if page.headeroverlay -%}
     {% set header_overlay = page.headeroverlay %}
+{%- elif page_data and 'header_overlay' in page_data -%}
+    {%- set header_overlay = page_data['header_overlay'] -%}
+{%- elif 'header_defaults' in THEME_SETTINGS and 'page_overlay_image' in THEME_SETTINGS['header_defaults'] -%}
+    {% set header_overlay = THEME_SETTINGS['header_defaults']['page_overlay_image'] %}
+{%- endif -%}
+
+{% if header_overlay %}
     {% if 'theme::' in header_overlay %}
         {% set header_overlay = header_overlay.split('::')[1] %}
         {% set header_overlay = '../' * sub_parts + 'theme/images/'+header_overlay %}
@@ -42,35 +56,41 @@
         {% set header_overlay = '../' * sub_parts + '/' +header_overlay %}
     {% endif %}
 {% endif %}
-{% set overlay_css = 'box-shadow: 0px 1000px '+overlay_tint+' inset;' %}
-<header class="page-top" {% if header_image %}style="background-image: url({{header_image}});box-shadow: 0px 1000px {{background_tint}} inset;overflow:hidden;position:relative"{% endif %}>
-    <div class="container" style="{{overlay_css}}">
+
+{%- if header_overlay_tint -%}
+    {%- set overlay_css = 'box-shadow: 0px 1000px '+header_overlay_tint+' inset;' -%}
+{%- endif -%}
+
+<header class="page-top" {% if header_image %}style="background-image: url({{header_image}});box-shadow: 0px 1000px {{header_bg_tint}} inset;overflow:hidden;position:relative"{% endif %}>
+    <div class="container" {% if overlay_css %}style="{{overlay_css}}"{% endif %}>
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <div class="page-heading {{pageheadingclass}}">
+                <div class="page-heading">
+                    {%- if header_overlay -%}
                     <div class="pull-right">
-                    {% if '.svg' in header_overlay %}
-                        <object class="img img-responsive sr-header-overlay" type="image/svg+xml" data="{{header_overlay}}"></object>
-                    {% else %}
-                        <img class="img img-responsive sr-header-overlay" src="{{header_overlay}}">
-                    {% endif %}
+                        {%- if '.svg' in header_overlay -%}
+                            <object class="img img-responsive sr-header-overlay" type="image/svg+xml" data="{{header_overlay}}"></object>
+                        {%- else -%}
+                            <img class="img img-responsive sr-header-overlay" src="{{header_overlay}}">
+                        {%- endif -%}
                     </div>
+                    {%- endif -%}
                     <h1>{{page.title}}</h1>
-                    {% if page.headertext %}
-                    {% if not page.headertextsecondary %}
-                    <hr class="small">
-                    {% endif %}
-                    <span class="subheading">{{page.headertext}}</span>
-                    {% endif %}
-                    {% if page.headertextsecondary %}
-                    <hr class="small">
-                    <span class="subheading subheading-secondary">{{page.headertextsecondary}}</span>
-                    {% endif %}
+                    {%- if page.headertext -%}
+                        {%- if not page.headertextsecondary -%}
+                            <hr class="small">
+                        {%- endif -%}
+                        <span class="subheading">{{page.headertext}}</span>
+                    {%- endif -%}
+                    {%- if page.headertextsecondary -%}
+                        <hr class="small">
+                        <span class="subheading subheading-secondary">{{page.headertextsecondary}}</span>
+                    {%- endif -%}
                 </div>
             </div>
         </div>
     </div>
-    {% if header_image_cc %}
+    {% if header_image_cc -%}
     <span class="header-cc-logo" data-toggle="tooltip" data-placement="top" title="{{header_image_cc}}"><i class="fa fa-creative-commons" aria-hidden="true"></i></span>
-    {% endif %}
+    {%- endif %}
 </header>

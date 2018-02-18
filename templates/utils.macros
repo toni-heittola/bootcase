@@ -1,0 +1,118 @@
+{% macro menu_item_processor(item_dict, current_page='', site_url='', sub_site='') -%}
+    {%- if 'url' in item_dict -%}
+        {%- if 'http://' in item_dict['url'] or 'https://' in item_dict['url'] -%}
+            {%- set link_target = "_blank" -%}
+            {%- set link_external = true -%}
+        {%- else -%}
+            {%- set link_target = False -%}
+        {%- endif -%}
+        {%- if link_external -%}
+            {%- set url = item_dict['url'] -%}
+        {%- else -%}
+            {%- set url = site_url + '/' + item_dict['url'] -%}
+        {%- endif -%}
+    {%- else -%}
+        {%- set url = False -%}
+    {%- endif -%}
+
+    {%- if 'icon' in item_dict and item_dict['icon'] is string -%}
+        {%- set icon = item_dict['icon'] -%}
+    {%- else -%}
+        {%- set icon = False -%}
+    {%- endif -%}
+
+    {%- if 'title' in item_dict and item_dict['title'] is string -%}
+        {%- set title = item_dict['title'] -%}
+    {%- else -%}
+        {%- set title = False -%}
+    {%- endif -%}
+
+    {%- if 'img' in item_dict and item_dict['img'] is string -%}
+        {%- set img = item_dict['img'] -%}
+    {%- else -%}
+        {%- set img = False -%}
+    {%- endif -%}
+
+    {%- if 'tooltip' in item_dict and item_dict['tooltip'] -%}
+        {%- set tooltip = true -%}
+
+        {%- if 'tooltip_text' in item_dict -%}
+            {%- set tooltip_text = item_dict['tooltip_text'] -%}
+        {%- elif title -%}
+            {%- set tooltip_text = title -%}
+        {%- else -%}
+            {%- set tooltip_text = url -%}
+        {%- endif -%}
+
+        {%- if 'tooltip_placement' in item_dict -%}
+            {%- set tooltip_placement = item_dict['tooltip_placement'] -%}
+        {%- else -%}
+            {%- set tooltip_placement = 'bottom' -%}
+        {%- endif -%}
+
+    {%- else -%}
+        {%- set tooltip = false -%}
+    {%- endif -%}
+
+    {%- if title and not url and 'dropdown' not in item_dict -%}
+        {%- set item_css = ' dropdown-header ' -%}
+        {%- set title = "<strong>"+title+"</strong>" -%}
+    {%- endif -%}
+
+    {%- if 'sub_site_fetching' in item_dict and item_dict['sub_site_fetching'] -%}
+        {%- set sub_site_fetching = item_dict['sub_site_fetching'] -%}
+    {%- endif -%}
+
+    {%- if 'divider' in item_dict and item_dict['divider'] -%}
+    <li class="divider" role="presentation"></li>
+
+    {%- elif 'logo' in item_dict and item_dict['logo'] and img -%}
+    <li class="{{ active_menu(url=url, current_page=current_page) }}{{ item_css }}"{% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+        {{ menu_link(url=url, img=img, link_target=link_target) }}
+    </li>
+
+    {%- elif 'dropdown' not in item_dict -%}
+    <li class="{{ active_menu(url=url, current_page=current_page, sub_site_fetching=sub_site_fetching, sub_site=sub_site) }}{{ item_css }}"{% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+        {{ menu_link(url=url, title=title, link_target=link_target, icon=icon) }}
+    </li>
+
+    {%- else -%}
+    <li class="btn-group {{active_menu(url=item_dict['dropdown'], current_page=current_page)}}{{item_css}}"{% if tooltip %}  data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+        {{ menu_link(url=url, title=title, link_target=link_target, icon=icon, dropdown=true) }}
+        <ul class="dropdown-menu" role="menu">
+        {% for sub_menu_dict in item_dict['dropdown'] %}
+            {{ menu_item_processor(item_dict=sub_menu_dict, current_page=current_page) }}
+        {% endfor %}
+        </ul>
+    </li>
+    {%- endif -%}
+{%- endmacro %}
+
+{% macro active_menu(url='', current_page='', sub_site_fetching='', sub_site='') -%}
+    {%- if url is string -%}
+        {%- if url == current_page or url == '/' + current_page -%}
+        {{- ' active' -}}
+        {%- elif sub_site_fetching and sub_site and sub_site == sub_site_fetching -%}
+        {{- ' active' -}}
+        {%- endif -%}
+    {%- elif url is iterable -%}
+        {%- for item in url -%}
+            {%- if 'url' in item  -%}
+                {{ active_menu(url=item['url'], current_page=current_page) }}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endmacro %}
+
+{% macro menu_link(url='', title='', img='', link_target='', icon='', dropdown=false) -%}
+    {%- if url or dropdown -%}
+        <a href="{% if url %}{{url}}{% else %}#{% endif %}"{% if link_target %} target="{{link_target}}" {% endif %}{% if dropdown %} class="dropdown-toggle" data-toggle="dropdown"{% endif %}>
+        {%- endif -%}
+            {%- if img -%}<img class="img img-responsive" src="{{img}}"/>{%- endif -%}
+            {%- if icon -%}<i class="{{icon}}"></i>&nbsp;{%- endif -%}
+            {%- if title -%}{{title}}{%- endif -%}
+            {%- if dropdown -%}&nbsp;<b class="caret"></b>{%- endif -%}
+        {%- if url or dropdown -%}
+        </a>
+    {%- endif -%}
+{%- endmacro %}

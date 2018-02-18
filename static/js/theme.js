@@ -26,7 +26,15 @@
     }
 
     $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip();
+
+        // Add nested dropdown menus
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $(this).parent().addClass('open');
+            $(this).parent().find("ul").parent().find("li.dropdown").addClass('open');
+        });
     });
 
 })(jQuery);

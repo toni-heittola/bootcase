@@ -1,95 +1,110 @@
-{% set output_file_parts = output_file.split('/') %}
-{% set sub_site = 'main' %}
-{% set sub_parts = (output_file_parts | length) - 1 %}
-{% if output_file_parts | length > 1 %}
-    {% set sub_site = output_file_parts[0] %}
-    {% set subsub_site = output_file_parts[-2] %}
-{% endif %}
-{% set category_data = THEME_ARTICLE_CATEGORIES[article.category] %}
-{% if sub_site %}
-    {% if category_data and 'tint' in category_data %}
-        {% set background_tint = category_data["tint"] %}
-    {% else %}
-        {% if sub_site in THEME_SITECOLORS and 'tint' in THEME_SITECOLORS[sub_site] %}
-            {% set background_tint = THEME_SITECOLORS[sub_site]["tint"] %}
-        {% else %}
-            {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
-        {% endif %}
-    {% endif %}
-    {% if sub_site in THEME_SITECOLORS and 'overlay' in THEME_SITECOLORS[sub_site] %}
-        {% set overlay_tint = THEME_SITECOLORS[sub_site]["overlay"] %}
-    {% else %}
-        {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
-    {% endif %}
-{% else %}
-    {% set background_tint = THEME_DEFAULT_HEADER_BACKGROUND_TINT %}
-    {% set overlay_tint = THEME_DEFAULT_HEADER_OVERLAY_TINT %}
-{% endif %}
-{% if article.headerimage %}
+{%- if 'article_categories' in THEME_SETTINGS and THEME_SETTINGS['article_categories'] and article.category|string() in THEME_SETTINGS['article_categories'] -%}
+    {%- set category_data = THEME_SETTINGS['article_categories'][article.category|string()] -%}
+{%- elif 'page_substyles' in THEME_SETTINGS and sub_site and sub_site|string() in THEME_SETTINGS['page_substyles'] -%}
+    {%- set category_data = THEME_SETTINGS['article_categories'][sub_site|string()] -%}
+{%- elif 'page_substyles' in THEME_SETTINGS and 'default' in THEME_SETTINGS['page_substyles'] -%}
+    {%- set category_data = THEME_SETTINGS['article_categories']['default'] -%}
+{%- endif -%}
+{%- if category_data and 'header_bg_tint' in category_data -%}
+    {%- set header_bg_tint = category_data["header_bg_tint"] -%}
+{%- else -%}
+    {% set header_bg_tint = 'rgba(0, 0, 0, 0.65)' %}
+{%- endif -%}
+
+{%- if category_data and 'header_overlay_tint' in category_data -%}
+    {%- set header_overlay_tint = category_data["header_overlay_tint"] -%}
+{%- else -%}
+    {% set header_overlay_tint = 'rgba(255, 255, 255, 0.1)' %}
+{%- endif -%}
+
+{%- if article.headerimage -%}
     {% set header_image = article.headerimage %}
     {% set header_image_cc = article.headerimagecc %}
-{% else %}
-    {% set header_image = THEME_DEFAULT_ARTICLE_HEADER_BG %}
-{% endif %}
-{% if 'theme::' in header_image %}
-    {% set header_image = header_image.split('::')[1] %}
-    {% set header_image = '../' * sub_parts + 'theme/images/'+header_image %}
-    {% if 'everyday-patterns' in header_image %}
-        {% set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' %}
-    {% endif %}
-{% else %}
-    {% set header_image = '../' * sub_parts + '/' +header_image %}
-{% endif %}
 
-{% if article.headeroverlay %}
+{%- elif 'header_defaults' in THEME_SETTINGS and 'article_background_image' in THEME_SETTINGS['header_defaults'] -%}
+    {% set header_image = THEME_SETTINGS['header_defaults']['article_background_image'] %}
+{%- endif -%}
+
+{%- if header_image -%}
+    {%- if 'theme::' in header_image -%}
+        {%- set header_image = header_image.split('::')[1] -%}
+        {%- set header_image = '../' * sub_parts + 'theme/images/'+header_image -%}
+        {%- if 'everyday-patterns' in header_image -%}
+            {%- set header_image_cc = 'Background photo by Toni Heittola / CC BY-NC 4.0' -%}
+        {%- endif -%}
+
+    {%- else -%}
+        {%- set header_image = '../' * sub_parts + '/' +header_image -%}
+
+    {%- endif -%}
+{%- endif -%}
+
+
+{%- if article.headeroverlay -%}
     {% set header_overlay = article.headeroverlay %}
-    {% if 'theme::' in header_overlay %}
+
+{%- elif 'header_defaults' in THEME_SETTINGS and 'article_overlay_image' in THEME_SETTINGS['header_defaults'] -%}
+    {% set header_overlay = THEME_SETTINGS['header_defaults']['article_overlay_image'] %}
+{%- endif -%}
+
+{%- if header_overlay -%}
+    {%- if 'theme::' in header_overlay -%}
         {% set header_overlay = header_overlay.split('::')[1] %}
         {% set header_overlay = '../' * sub_parts + 'theme/images/'+header_overlay %}
-    {% else %}
+    {%- else -%}
         {% set header_overlay = '../' * sub_parts + '/' +header_overlay %}
-    {% endif %}
-{% endif %}
-{% set overlay_css = 'box-shadow: 0px 1000px '+overlay_tint+' inset;' %}
-<header class="article-top" {% if header_image %}style="background-image: url({{header_image}});box-shadow: 0px 1000px {{background_tint}} inset;overflow:hidden;position:relative"{% endif %}>
+    {%- endif -%}
+{%- endif -%}
+
+{%- if header_overlay_tint -%}
+    {% set overlay_css = 'box-shadow: 0px 1000px '+header_overlay_tint+' inset;' %}
+{%- endif -%}
+
+<header class="article-top" {% if header_image %}style="background-image: url({{header_image}});box-shadow: 0px 1000px {{header_bg_tint}} inset;overflow:hidden;position:relative"{% endif %}>
     <div class="container" style="height:100%;">
         <div class="row" style="height:100%;">
             <div class="col-md-offset-2 col-md-8 b20" style="height:100%;{{overlay_css}}">
                 <div class="page-heading {{pageheadingclass}}" style="height:100%;">
+                    {%- if header_overlay -%}
                     <div class="pull-right">
-                    {% if '.svg' in header_overlay %}
-                        <object class="img img-responsive sr-header-overlay" type="image/svg+xml" data="{{header_overlay}}"></object>
-                    {% else %}
-                        <img class="img img-responsive sr-header-overlay" src="{{header_overlay}}">
-                    {% endif %}
+                        {%- if '.svg' in header_overlay -%}
+                            <object class="img img-responsive sr-header-overlay" type="image/svg+xml" data="{{header_overlay}}"></object>
+                        {%- else -%}
+                            <img class="img img-responsive sr-header-overlay" src="{{header_overlay}}">
+                        {%- endif -%}
                     </div>
+                    {%- endif -%}
                     <h2>{{article.title}}</h2>
-                    {% if article.headertext %}
+                    {%- if article.headertext -%}
                     <hr class="small">
-                    <span class="subheading">{{article.headertext}}</span>
+                    <span class="subheading">{{ article.headertext }}</span>
                     {% endif %}
                     <div class="text-muted2 pull-left">
                         <small>
-                            <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>,
-                            <em><strong>{{ article.author }}</strong></em>
+                            <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>
+                            {%- if 'article' in THEME_SETTINGS and 'show_author' in THEME_SETTINGS['article'] and THEME_SETTINGS['article']['show_author'] -%}
+                            , <em><strong>{{ article.author }}</strong></em>
+                            {%- endif -%}
                         </small>
                     </div>
+                    {%- if 'article' in THEME_SETTINGS and 'show_category' in THEME_SETTINGS['article'] and THEME_SETTINGS['article']['show_category'] -%}
                     <div class="text-muted2 pull-right">
                         <small>
-                        {% if category_data and 'label-css' in category_data %}
-                        <span class="{{category_data['label-css']}}">
-                        {% else %}
+                        {%- if category_data and 'label_css' in category_data -%}
+                        <span class="{{category_data['label_css']}}">
+                        {%- else -%}
                         <span class="label label-default">
-                        {% endif %}
-                            {{ article.category }}
+                        {%- endif -%}
+                        {{ article.category }}
                         </span>
                         </small>
                     </div>
+                    {%- endif -%}
                 </div>
             </div>
         </div>
     </div>
-    {% if header_image_cc %}
+    {% if header_image_cc -%}
     <span class="header-cc-logo" data-toggle="tooltip" data-placement="top" title="{{header_image_cc}}"><i class="fa fa-creative-commons" aria-hidden="true"></i></span>
-    {% endif %}
+    {%- endif %}
 </header>
