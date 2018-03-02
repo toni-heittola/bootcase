@@ -9,6 +9,8 @@ site:
 # Assets settings
 assets:
   fontawesome: true
+  dcaseicons: false
+  academicons: false
   colorbox: false
   audio: false
   timeago: false
