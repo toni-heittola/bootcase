@@ -66,6 +66,11 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="page-heading">
+                    {%- if page.headericon -%}
+                    <div class="pull-left">
+                    {{page.headericon}}
+                    </div>
+                    {%- endif -%}
                     {%- if header_overlay -%}
                     <div class="pull-right">
                         {%- if '.svg' in header_overlay -%}
