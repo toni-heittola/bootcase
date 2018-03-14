@@ -758,29 +758,26 @@ ul.social-buttons li a:active {
 }
 
 /* figure */
-.figure {
-  display: block;
-  padding: 10px;
-  background-color: #f7f5fa;
+figure {
+    border-top: 1px solid #EEE;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #EEE;
+    background-color: #FAFAFA;
 }
-.figure img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
+figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
-.figure em {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 90%;
-  border-top: 1px solid #DDD;
-  color: #666;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+figcaption {
+    display: block;
+    font-style: italic;
 }
+
 
 /* brepository */
 .brepository-container .list-group-item-heading{
