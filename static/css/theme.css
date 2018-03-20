@@ -26,12 +26,14 @@ p {
 .entry-content {
     /*margin-top: 20px;*/
 }
-.entry-content p a {
+.entry-content p a, .entry-content li a {
     color: #333;
     text-decoration: none;
     border-bottom: 1px dotted;
 }
-
+.entry-content p a:hover, .entry-content li a:hover{
+    border-color: #333;
+}
 .entry-content img {
     max-width: 100%;
     height: auto;
