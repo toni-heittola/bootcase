@@ -35,6 +35,14 @@ p {
 .entry-content p a:hover, .entry-content li a:hover{
     border-color: #333;
 }
+.entry-content p a.btn, .entry-content li a.btn{
+    color: #FFF;
+    text-decoration: none;
+    border: 1px solid;
+}
+.entry-content p a.btn-default, .entry-content li a.btn-default{
+    color: #333;
+}
 .entry-content img {
     max-width: 100%;
     height: auto;
@@ -62,6 +70,12 @@ hr.small {
 
 a, a:hover {
     color: inherit;
+}
+a .label{
+    border: 1px solid transparent;
+}
+a .label:hover{
+    border: 1px solid #333;
 }
 
 /* Fix for preventing navbar from overlapping */
