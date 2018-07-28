@@ -1,3 +1,5 @@
+{% set output_file_parts = output_file.split('/') %}
+{% set sub_parts = (output_file_parts | length) - 1 %}
 {%- if 'page_substyles' in THEME_SETTINGS and sub_site|string() in THEME_SETTINGS['page_substyles'] -%}
     {% set page_data = THEME_SETTINGS['page_substyles'][sub_site|string()] %}
 {%- elif 'page_substyles' in THEME_SETTINGS and 'default' in THEME_SETTINGS['page_substyles'] -%}

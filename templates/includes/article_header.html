@@ -1,3 +1,5 @@
+{% set output_file_parts = output_file.split('/') %}
+{% set sub_parts = (output_file_parts | length) - 1 %}
 {%- if 'article_categories' in THEME_SETTINGS and THEME_SETTINGS['article_categories'] and article.category|string() in THEME_SETTINGS['article_categories'] -%}
     {%- set category_data = THEME_SETTINGS['article_categories'][article.category|string()] -%}
 {%- elif 'page_substyles' in THEME_SETTINGS and sub_site and sub_site|string() in THEME_SETTINGS['page_substyles'] -%}
