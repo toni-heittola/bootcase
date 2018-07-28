@@ -28,6 +28,8 @@
 {%- endif -%}
 
 {%- if header_image -%}
+    {%- set output_file_parts = output_file.split('/') -%}
+    {%- set sub_parts = (output_file_parts | length) - 1 -%}
     {%- if 'theme::' in header_image -%}
         {%- set header_image = header_image.split('::')[1] -%}
         {%- set header_image = '../' * sub_parts + 'theme/images/'+header_image -%}

@@ -26,6 +26,12 @@ To install bootcase, copy theme files under `theme/bootcase/` directory and in `
 
     THEME = 'themes/bootcase/'
 
+Additional parameters to set:
+
+    DIRECT_TEMPLATES = ['news']
+    PAGE_URL = '{slug}'
+    PAGE_SAVE_AS = '{slug}.html'
+
 Theme settings are set in variable `THEME_SETTINGS`. To read theme default settings in, and overriding only specific settings add following code to `pelicanconf.py`:
     
     # Set theme
