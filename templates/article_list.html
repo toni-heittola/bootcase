@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-{%- if 'header_defaults' in THEME_SETTINGS and 'article_list_background_image' in THEME_SETTINGS['header_defaults'] -%}
-    {%- set header_image = THEME_SETTINGS['header_defaults']['article_list_background_image'] -%}
+{%- if 'header' in THEME_SETTINGS and 'defaults' in THEME_SETTINGS['header'] and 'article_list_background_image' in THEME_SETTINGS['header']['defaults'] -%}
+    {%- set header_image = THEME_SETTINGS['header']['defaults']['article_list_background_image'] -%}
+{%- endif -%}
+
+{%- if 'header' in THEME_SETTINGS and 'text_style' in THEME_SETTINGS['header'] -%}
+    {% set header_text_style = THEME_SETTINGS['header']['text_style'] %}
+{%- else -%}
+    {% set header_text_style = 'bold' %}
+{%- endif -%}
+{%- if 'header' in THEME_SETTINGS and 'text_align' in THEME_SETTINGS['header'] -%}
+    {% set header_text_align = THEME_SETTINGS['header']['text_align'] %}
+{%- else -%}
+    {% set header_text_align = 'right' %}
 {%- endif -%}
 
 {%- if header_image -%}
@@ -21,8 +32,8 @@
     <div class="container" style="height:100%;">
         <div class="row" style="height:100%;">
             <div class="col-md-offset-2 col-md-8 b20" style="height:100%;">
-                <div class="page-heading" style="height:100%;">
-                    <h2>News articles</h2>
+                <div class="page-heading {% if header_text_align == "right" -%}text-right{%- elif header_text_align == "center"-%}text-center{%- endif -%}" style="height:100%;">
+                    <h2 class="{% if header_text_style == "bold" -%}bold{%- elif header_text_style == "thin"-%}thin{%- endif -%}">News articles</h2>
                 </div>
             </div>
         </div>
