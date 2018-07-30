@@ -1,7 +1,31 @@
 {% block nav %}
-{% set current_page = output_file|replace(".html","") | replace("index","") %}
+{%- if 'menu' in THEME_SETTINGS and 'width' in THEME_SETTINGS['menu'] -%}
+    {% set menu_width = THEME_SETTINGS['menu']['width'] %}
+{%- else -%}
+    {% set menu_width = 'normal' %}
+{%- endif -%}
+
+{%- if 'menu' in THEME_SETTINGS and 'pageanchors_location' in THEME_SETTINGS['menu'] -%}
+    {% set pageanchors_location = THEME_SETTINGS['menu']['pageanchors_location'] %}
+{%- else -%}
+    {% set pageanchors_location = 'sub' %}
+{%- endif -%}
+
+{%- if 'menu' in THEME_SETTINGS and 'pageanchors_show_current_page' in THEME_SETTINGS['menu'] -%}
+    {% set pageanchors_show_current_page = THEME_SETTINGS['menu']['pageanchors_show_current_page'] %}
+{%- else -%}
+    {% set pageanchors_show_current_page = False %}
+{%- endif -%}
+
+{%- set current_page = output_file|replace(".html","") | replace("index","") -%}
+
+{%- if article -%}
+{%- set current_title = article.title -%}
+{%- elif page -%}
+{%- set current_title = page.title -%}
+{%- endif -%}
 <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-spy="affix" data-offset-top="195">
-    <div class="container">
+    <div class="{% if menu_width == 'normal' -%}container{%- elif menu_width == 'wide'-%}container-fluid{%- endif %}">
         <div class="row">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
@@ -23,26 +47,59 @@
                 {%- if 'menu' in THEME_SETTINGS and 'top_left' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['top_left'] is iterable -%}
                 <ul class="nav navbar-nav" id="menuitem-list-main">
                 {%- for menu_dict in THEME_SETTINGS['menu']['top_left'] -%}
-                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) -}}
+                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, current_title=current_title, site_url=SITEURL, sub_site=sub_site) -}}
                 {%- endfor -%}
                 </ul>
+                {%- endif %}
+
+                {%- if pageanchors_location == 'top_left' and ((article and article.pageanchors) or (page and page.pageanchors)) %}
+                    {% if article %}
+                        {% if article.pageanchors %}
+                        <ul class="nav navbar-nav small" id="page-navbar">
+                        {%- if pageanchors_show_current_page and article.title %}
+                            <li><a href="" class="page-scroll">{{article.title}}&nbsp;>&nbsp;</a></li>
+                        {% endif -%}
+                        {% set pageanchors = article.pageanchors.split(',') %}
+                        {% for anchor in pageanchors %}
+                            {% set anchor_parts = anchor.split(':') %}
+                            <li><a href="#{{anchor_parts[1]}}" class="page-scroll">{{anchor_parts[0]}}</a></li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% elif page %}
+                        {% if page.pageanchors %}
+                        <ul class="nav navbar-nav small" id="page-navbar">
+                        {%- if pageanchors_show_current_page and page.title %}
+                            <li><a href="" class="page-scroll">{{page.title}}&nbsp;>&nbsp;</a></li>
+                        {% endif -%}
+                        {% set pageanchors = page.pageanchors.split(',') %}
+                        {% for anchor in pageanchors %}
+                            {% set anchor_parts = anchor.split(':') %}
+                            <li><a href="#{{anchor_parts[1]}}" class="page-scroll">{{anchor_parts[0]}}</a></li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endif %}
                 {%- endif %}
 
                 {%- if 'menu' in THEME_SETTINGS and 'top_right' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['top_right'] is iterable -%}
                 <ul class="nav navbar-nav navbar-right" id="menuitem-list">
                 {%- for menu_dict in THEME_SETTINGS['menu']['top_right'] -%}
-                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) -}}
+                {{- macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, current_title=current_title, site_url=SITEURL, sub_site=sub_site) -}}
                 {%- endfor %}
                 </ul>
                 {%- endif %}
             </div>
         </div>
-        {%- if (article and article.pageanchors) or (page and page.pageanchors) %}
+        {%- if pageanchors_location == 'sub' and ((article and article.pageanchors) or (page and page.pageanchors)) %}
         <div class="row">
             <div id="navbar-page-pub" class="navbar-collapse collapse">
             {% if article %}
                 {% if article.pageanchors %}
                 <ul class="nav navbar-nav navbar-left small" id="page-navbar">
+                {%- if pageanchors_show_current_page and page.title %}
+                    <li><a href="" class="page-scroll">{{page.title}}&nbsp;>&nbsp;</a></li>
+                {% endif -%}
                 {% set pageanchors = article.pageanchors.split(',') %}
                 {% for anchor in pageanchors %}
                     {% set anchor_parts = anchor.split(':') %}
@@ -69,7 +126,7 @@
              <div id="navbar-sub" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right" id="menuitem-list-sub">
                 {%- for menu_dict in THEME_SETTINGS['menu']['sub'][sub_site] -%}
-                {{ macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, site_url=SITEURL, sub_site=sub_site) }}
+                {{ macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, current_title=current_title, site_url=SITEURL, sub_site=sub_site) }}
                 {%- endfor -%}
                 </ul>
              </div>
