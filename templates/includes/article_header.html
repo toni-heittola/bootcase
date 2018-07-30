@@ -13,6 +13,17 @@
     {% set header_bg_tint = 'rgba(0, 0, 0, 0.65)' %}
 {%- endif -%}
 
+{%- if 'header' in THEME_SETTINGS and 'text_style' in THEME_SETTINGS['header'] -%}
+    {% set header_text_style = THEME_SETTINGS['header']['text_style'] %}
+{%- else -%}
+    {% set header_text_style = 'bold' %}
+{%- endif -%}
+{%- if 'header' in THEME_SETTINGS and 'text_align' in THEME_SETTINGS['header'] -%}
+    {% set header_text_align = THEME_SETTINGS['header']['text_align'] %}
+{%- else -%}
+    {% set header_text_align = 'right' %}
+{%- endif -%}
+
 {%- if category_data and 'header_overlay_tint' in category_data -%}
     {%- set header_overlay_tint = category_data["header_overlay_tint"] -%}
 {%- else -%}
@@ -23,8 +34,8 @@
     {% set header_image = article.headerimage %}
     {% set header_image_cc = article.headerimagecc %}
 
-{%- elif 'header_defaults' in THEME_SETTINGS and 'article_background_image' in THEME_SETTINGS['header_defaults'] -%}
-    {% set header_image = THEME_SETTINGS['header_defaults']['article_background_image'] %}
+{%- elif 'header' in THEME_SETTINGS and 'defaults' in THEME_SETTINGS['header'] and 'article_background_image' in THEME_SETTINGS['header']['defaults'] -%}
+    {% set header_image = THEME_SETTINGS['header']['defaults']['article_background_image'] %}
 {%- endif -%}
 
 {%- if header_image -%}
@@ -47,8 +58,8 @@
 {%- if article.headeroverlay -%}
     {% set header_overlay = article.headeroverlay %}
 
-{%- elif 'header_defaults' in THEME_SETTINGS and 'article_overlay_image' in THEME_SETTINGS['header_defaults'] -%}
-    {% set header_overlay = THEME_SETTINGS['header_defaults']['article_overlay_image'] %}
+{%- elif 'header' in THEME_SETTINGS and 'defaults' in THEME_SETTINGS['header'] and 'article_overlay_image' in THEME_SETTINGS['header']['defaults'] -%}
+    {% set header_overlay = THEME_SETTINGS['header']['defaults']['article_overlay_image'] %}
 {%- endif -%}
 
 {%- if header_overlay -%}
@@ -68,7 +79,7 @@
     <div class="container" style="height:100%;">
         <div class="row" style="height:100%;">
             <div class="col-md-offset-2 col-md-8 b20" style="height:100%;{{overlay_css}}">
-                <div class="page-heading {{pageheadingclass}}" style="height:100%;">
+                <div class="page-heading {{pageheadingclass}} {% if header_text_align == "right" -%}text-right{%- elif header_text_align == "center"-%}text-center{%- endif -%}" style="height:100%;">
                     {%- if header_overlay -%}
                     <div class="pull-right">
                         {%- if '.svg' in header_overlay -%}
@@ -78,9 +89,9 @@
                         {%- endif -%}
                     </div>
                     {%- endif -%}
-                    <h2>{{article.title}}</h2>
+                    <h2 class="{% if header_text_style == "bold" -%}bold{%- elif header_text_style == "thin"-%}thin{%- endif -%}">{{article.title}}</h2>
                     {%- if article.headertext -%}
-                    <hr class="small">
+                    <hr class="small {% if header_text_align == "right" -%}right{%- elif header_text_align == "center"-%}center{%- endif %} {% if header_text_style == "bold" -%}bold{%- elif header_text_style == "thin"-%}thin{%- endif -%}">
                     <span class="subheading">{{ article.headertext }}</span>
                     {% endif %}
                     <div class="text-muted2 pull-left">
