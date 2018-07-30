@@ -14,7 +14,7 @@ assets:
   colorbox: false
   audio: false
   timeago: false
-  fulpage: false
+  fullpage: false
   scrollreveal: true
   anijs: false
   pygments: false
