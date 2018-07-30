@@ -3,7 +3,13 @@
 <br>
 {% endif %}
 {% if page.sidehtml %}
-{{ page.sidehtml }}
+    {%- if page.sidehtml is iterable and page.sidehtml is not string %}
+        {%- for line in page.sidehtml -%}
+            {{ line }}
+        {% endfor %}
+    {% else %}
+        {{ page.sidehtml }}
+    {% endif -%}
 {% endif %}
 {% if page.bdates %}
 {{ page.bdates }}
