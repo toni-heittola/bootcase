@@ -62,6 +62,19 @@
     {% if FEED_ALL_RSS %}
     <link href="{{ SITEURL }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed"/>
     {% endif %}
+    {% if article and article.extra_css_style %}{% set extra_css_style = article.extra_css_style %}{% endif %}
+    {% if page and page.extra_css_style %}{% set extra_css_style = page.extra_css_style %}{% endif %}
+    {% if extra_css_style %}
+        <style>
+            {%- if extra_css_style is iterable and extra_css_style is not string %}
+                {%- for line in extra_css_style -%}
+                    {{ line }}
+                {% endfor %}
+            {% else %}
+                {{ extra_css_style }}
+            {% endif -%}
+        </style>
+    {% endif %}
 </head>
 <body>
 {% set output_file_parts = output_file.split('/') %}
