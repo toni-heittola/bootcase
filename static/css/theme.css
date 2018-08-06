@@ -1143,3 +1143,8 @@ a.text:hover{
 .header-cc-logo:hover{
     color: rgba(255, 255, 255, 1.0);
 }
+
+.bootstrap-table .pagination a{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
