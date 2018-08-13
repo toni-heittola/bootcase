@@ -35,7 +35,7 @@ p {
 .entry-content p a:hover, .entry-content li a:hover{
     border-color: #333;
 }
-.entry-content p a.btn, .entry-content li a.btn{
+.entry-content a.btn{
     color: #FFF;
     text-decoration: none;
     border: 1px solid;
