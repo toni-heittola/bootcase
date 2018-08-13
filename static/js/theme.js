@@ -20,7 +20,6 @@
     var navHeight = $('.navbar').outerHeight(true) + 10
     if ( $('#page-navbar').length) {
         $('body').scrollspy({
-          target: '.navbar-fixed-top',
           offset: navHeight
         });
     }

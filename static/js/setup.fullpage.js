@@ -4,7 +4,7 @@
     $(document).ready(function() {
         $('#fullpage').fullpage({
             paddingTop: '45px',
-            scrollOverflow: true,
+            //scrollOverflow: true,
             scrollBar: true,
             navigation: true,
             navigationPosition: 'right',

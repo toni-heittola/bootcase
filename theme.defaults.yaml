@@ -14,7 +14,7 @@ assets:
   colorbox: false
   audio: false
   timeago: false
-  fulpage: false
+  fullpage: false
   scrollreveal: true
   anijs: false
   pygments: false
@@ -29,6 +29,11 @@ custom_css: false
 
 # Menu settings
 menu:
+  width: normal
+
+  pageanchors_location: sub
+  pageanchors_show_current_page: false
+
   top_left:
   top_right:
   sub:
@@ -37,11 +42,15 @@ menu:
 footer:
   show: true
 
-# Header defaults
-header_defaults:
-  article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-  article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-  page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+header:
+  text_style: bold           # [bold, thin]
+  text_align: right          # [center, right]
+
+  # Header defaults
+  defaults:
+    article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+    article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+    page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
 
 # Article info settings
 article:
