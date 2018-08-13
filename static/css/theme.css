@@ -35,7 +35,7 @@ p {
 .entry-content p a:hover, .entry-content li a:hover{
     border-color: #333;
 }
-.entry-content p a.btn, .entry-content li a.btn{
+.entry-content a.btn{
     color: #FFF;
     text-decoration: none;
     border: 1px solid;
@@ -1161,6 +1161,11 @@ a.text:hover{
     color: rgba(255, 255, 255, 1.0);
 }
 
+.bootstrap-table .pagination a{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
 .gradient1 {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+100;White+3D */
     background: #ffffff; /* Old browsers */
@@ -1208,4 +1213,3 @@ a.text:hover{
 .navbar-right{
     margin-right: 0px;
 }
-
