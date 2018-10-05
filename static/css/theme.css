@@ -40,6 +40,7 @@ p {
     text-decoration: none;
     border: 1px solid;
 }
+
 .entry-content p a.btn-default, .entry-content li a.btn-default{
     color: #333;
 }
@@ -84,8 +85,8 @@ h1[id],h2[id],h3[id],h4[id]{
   margin-top: -45px;
 }
 h1[id].panel-title,h2[id].panel-title,h3[id].panel-title,h4[id].panel-title{
-  padding-top: 0px;
-  margin-top: 0px;
+  padding-top: 0;
+  margin-top: 0;
 }
 
 /* copied from yeti theme */
@@ -94,7 +95,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 300;
     line-height: 1.1;
     color: inherit;
-    margin-top: 0px;
+    margin-top: 0;
 }
 a h1, a h2, a h3, a h4, a h5, a h6, a .h1, a .h2, a .h3, a .h4, a .h5, a .h6{
     color: rgb(51,51,51);
@@ -224,7 +225,7 @@ a.bg-danger:hover{background-color:#e4b9b9}
   background-size: cover;
   -o-background-size: cover;
 
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .page-top .page-heading, .article-top .page-heading{
@@ -239,7 +240,7 @@ a.bg-danger:hover{background-color:#e4b9b9}
 
 .page-top .page-heading .subheading, .article-top .page-heading .subheading  {
   font-size: 24px;
-  line-height: 1.1,
+  line-height: 1.1;
   display: block;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300;
@@ -248,7 +249,7 @@ a.bg-danger:hover{background-color:#e4b9b9}
 
 .article-top {
     height: 160px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .article-rest {
     position: absolute;
@@ -297,9 +298,9 @@ a.bg-danger:hover{background-color:#e4b9b9}
     font-size: 36px;
 }
 .header-slide h2, .header-slide h3, .header-slide h4{
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
 }
 
 .header-slide p {
@@ -308,14 +309,14 @@ a.bg-danger:hover{background-color:#e4b9b9}
   font-size: 16px;
   margin-bottom: 10px;
   text-align: justify;
-  margin-right: 0px;
+  margin-right: 0;
 }
 .header-slide p a{
     font-weight: 500;
     color: #AAA;
 }
 .header-slide hr {
-  margin-right: 0px;
+  margin-right: 0;
   border-color: #F05F40;
   border-width: 3px;
   max-width: 20%;
@@ -585,7 +586,7 @@ fieldset[disabled] .btn-inverse.active {
 /* scroll top button */
 .scroll-top {
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     right: 6%;
     z-index: 100;
     background: none repeat scroll 0% 0% rgba(255, 204, 51, 0.5);
@@ -613,7 +614,7 @@ fieldset[disabled] .btn-inverse.active {
 }
 
 .link-container .col-md-5, .link-container .col-md-2, .link-container .col-md-1 {
-    padding: 0px;
+    padding: 0;
 }
 
 .link-container .label,.link-container-dark .label, .link-container .label-muted, .link-container-dark .label-muted {
@@ -623,7 +624,7 @@ fieldset[disabled] .btn-inverse.active {
     margin-left: 5px;
     margin-right: 5px;
     font-size: 12px;
-    border-radius: 0px;
+    border-radius: 0;
 }
 .link-container-dark .label {
     color: rgba(0, 0, 0, 0.75);
@@ -647,8 +648,8 @@ ul.social-buttons {
 }
 
 ul.social-buttons li {
-  padding-left:  0px;
-  padding-right: 0px;
+  padding-left:  0;
+  padding-right: 0;
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -994,7 +995,7 @@ header .page-heading hr.thin {
 
 header .page-heading h1, header .page-heading-portal h1{
     font-family: 'Heebo', 'PT Sans Caption', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin-top: 0px;
+    margin-top: 0;
     font-size: 50px;
 }
 header .page-heading .bold{
@@ -1024,7 +1025,7 @@ header .page-heading-portal .subheading{
 
 header .page-heading .subheading {
     font-size: 16px;
-    line-height: 1.1,
+    line-height: 1.1;
     display: block;
     font-family: 'Heebo', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 400;
@@ -1097,7 +1098,7 @@ header .page-heading .subheading-challenge-secondary {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 0px;
+    bottom: 0;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1211,5 +1212,9 @@ a.text:hover{
     line-height: 1.42857;
 }
 .navbar-right{
-    margin-right: 0px;
+    margin-right: 0;
+}
+
+.publication-item a.btn {
+    border: 0;
 }
