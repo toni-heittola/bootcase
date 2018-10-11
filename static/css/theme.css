@@ -38,7 +38,7 @@ p {
 .entry-content a.btn{
     color: #FFF;
     text-decoration: none;
-    border: 1px solid;
+    border: 1px solid transparent;
 }
 
 .entry-content p a.btn-default, .entry-content li a.btn-default{
@@ -1216,5 +1216,5 @@ a.text:hover{
 }
 
 .publication-item a.btn {
-    border: 0;
+    border: 1px solid transparent;
 }
