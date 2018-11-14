@@ -56,6 +56,7 @@
     {% if 'site' in THEME_SETTINGS and 'custom_css' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['custom_css'] %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_SETTINGS['site']['custom_css'] }}" type="text/css"/>
     {% endif %}
+    <script type="text/javascript" src="{{ SITEURL }}/theme/assets/jquery/jquery.min.js"></script>
     {% if FEED_ALL_ATOM %}
     <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed"/>
     {% endif %}
@@ -92,7 +93,6 @@
 {% if 'footer' in THEME_SETTINGS and 'show' in THEME_SETTINGS['footer'] and THEME_SETTINGS['footer']['show'] %}
 {% include 'includes/footer.html' %}
 {% endif %}
-<script type="text/javascript" src="{{ SITEURL }}/theme/assets/jquery/jquery.min.js"></script>
 {% if 'assets' in THEME_SETTINGS and 'colorbox' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['colorbox'] %}
 <script type="text/javascript" src="{{ SITEURL }}/theme/assets/colorbox/js/jquery.colorbox-min.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/js/setup.colorbox.js"></script>
