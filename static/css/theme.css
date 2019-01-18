@@ -3,6 +3,7 @@ body {
   padding-top: 45px;  /*Account for fixed navbar */
   height: 100%;
   width: 100%;
+  font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 html {
   width: 100%;
@@ -83,11 +84,11 @@ h1[id].panel-title,h2[id].panel-title,h3[id].panel-title,h4[id].panel-title{
   margin-top: 0;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     line-height: 1.1;
     color: inherit;
-    margin-top: 0;
+    /*margin-top: 0;*/
 }
 a h1, a h2, a h3, a h4, a h5, a h6, a .h1, a .h2, a .h3, a .h4, a .h5, a .h6{
     color: rgb(51,51,51);
