@@ -80,6 +80,11 @@
     {%- if 'divider' in item_dict and item_dict['divider'] -%}
     <li class="divider" role="presentation"></li>
 
+    {%- elif 'header' in item_dict and item_dict['header'] -%}
+    <li class="disabled" {% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+        <a>{{title}}</a>
+    </li>
+
     {%- elif 'logo' in item_dict and item_dict['logo'] and img -%}
     <li class="{{ active_menu(url=url, current_page=current_page) }}{{ item_css }}"{% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
         {{ menu_link(url=url, img=img, link_target=link_target) }}

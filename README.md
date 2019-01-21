@@ -175,6 +175,7 @@ Menus are set using list of *menu dictionary items*. Menu item is a dictionary w
 | sub_site_fetching | string        | Alternative sub-path used to activate the menu item. For example, if article list is mapped at /news, and articles are under articles/ sub-path, this parameter can be used to activate correct menu item when article is open    |
 | dropdown          | list of menu items | Sub-menu.                                                                    |
 | divider           | bool          | When true, only menu divider is inserted.                                         |
+| header            | bool          | When true, only title without link is printed                                     |
 | tooltip           | bool          | Add tooltip for the menu item.                                                    |
 | tooltip_text      | string        | Tooltip text.                                                                     |
 | tooltip_placement | string        | Tooltip placement, see [Bootstrap documentation for more](https://getbootstrap.com/docs/3.3/javascript/#tooltips).  |
