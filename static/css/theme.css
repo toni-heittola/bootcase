@@ -578,6 +578,14 @@ fieldset[disabled] .btn-inverse.active {
     color: rgba(0, 0, 0, 0.75);
     border: none;
 }
+.label-success-muted{
+    background-color: #7bc57b;
+}
+.label-warning-muted{
+    background-color: #f3bc70;
+}
+
+
 /* social buttons */
 .social-buttons img{
   border: none !important;
