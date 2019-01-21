@@ -223,13 +223,13 @@ a.bg-danger:hover{background-color:#e4b9b9}
 }
 
 .article-top {
-    height: 160px;
+    /*height: 160px;*/
     margin-bottom: 0;
 }
 .article-rest {
-    position: absolute;
+    /*position: absolute;
     top: 205px;
-    bottom: 0;
+    bottom: 0;*/
     width: 100%;
 }
 
