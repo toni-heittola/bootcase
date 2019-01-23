@@ -41,7 +41,7 @@ p {
 }*/
 .entry-content p a.btn-default, .entry-content li a.btn-default{
     color: #333;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #BBB;
 }
 .entry-content img {
     max-width: 100%;
