@@ -976,6 +976,10 @@ header .page-heading .subheading-challenge-secondary {
   color: white;
   margin-top: -2.2em;
 }
+.dcase-icon-top-text-sm {
+    font-size: 26%;
+}
+
 .dcase-icon-bottom-text{
   font-style: bold;
   font-size: 25%;
