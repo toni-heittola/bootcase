@@ -39,10 +39,14 @@ p {
     text-decoration: none;
     border: 1px solid transparent;
 }*/
-.entry-content p a.btn-default, .entry-content li a.btn-default{
+.entry-content p a.btn, .entry-content li a.btn{
     color: #333;
-    border-bottom: 1px solid #BBB;
+    border: 1px solid rgb(187, 187, 187);
 }
+.entry-content p a.btn:hover, .entry-content li a.btn:hover{
+    border: 1px solid #333;
+}
+
 .entry-content img {
     max-width: 100%;
     height: auto;
