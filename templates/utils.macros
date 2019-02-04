@@ -96,7 +96,7 @@
     </li>
 
     {%- else -%}
-    <li class="btn-group {{active_menu(url=item_dict['dropdown'], current_page=current_page)}}{{item_css}}"{% if tooltip %}  data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+    <li class="btn-group {{active_menu(url=item_dict['dropdown'], current_page=current_page)}}{{item_css}}"{% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
         {{ menu_link(url=url, title=title, link_target=link_target, icon=icon, dropdown=true) }}
         <ul class="dropdown-menu" role="menu">
         {% for sub_menu_dict in item_dict['dropdown'] %}

@@ -1004,11 +1004,13 @@ header .page-heading .subheading-challenge-secondary {
     margin-left: auto;
     margin-right: auto;
 }
+
 .silentlogo{
     filter: gray; /* IE6-9 */
     filter: grayscale(1); /* Firefox 35+ */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
 }
+
 .silentlogo:hover{
   filter: none;
   -webkit-filter: grayscale(0);
@@ -1095,8 +1097,6 @@ a.text:hover{
 #menuitem-list-main li.dropdown-header{
     display: block;
     padding-top: 18px;
-    /*padding-left: 8px;
-    padding-right: 8px;*/
     margin-left: -16px;
 }
 #page-navbar{
@@ -1105,8 +1105,6 @@ a.text:hover{
 #page-navbar a.page-scroll{
     padding-left: 8px;
     padding-right: 8px;
-    /*padding-top: 18px;
-    margin-bottom: -3px;*/
 }
 .navbar-nav > li > a {
     line-height: 1.42857;
@@ -1118,3 +1116,5 @@ a.text:hover{
 .publication-item a.btn {
     border: 1px solid transparent;
 }
+
+.tooltip > .tooltip-inner { background-color: #1A1A1A; }

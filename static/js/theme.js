@@ -25,7 +25,7 @@
     }
 
     $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="tooltip"]').tooltip({container: 'body'});
 
         // Add nested dropdown menus
         $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
