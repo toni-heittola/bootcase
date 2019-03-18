@@ -39,10 +39,28 @@ p {
     text-decoration: none;
     border: 1px solid transparent;
 }*/
-.entry-content p a.btn-default, .entry-content li a.btn-default{
+.entry-content p a.btn, .entry-content li a.btn{
     color: #333;
-    border-bottom: 1px solid #BBB;
+    border: 1px solid rgb(187, 187, 187);
 }
+.entry-content p a.btn-primary,
+.entry-content p a.btn-success,
+.entry-content p a.btn-info,
+.entry-content p a.btn-warning,
+.entry-content p a.btn-danger,
+.entry-content li a.btn-primary,
+.entry-content li a.btn-success,
+.entry-content li a.btn-info,
+.entry-content li a.btn-warning,
+.entry-content li a.btn-danger
+{
+    color: #fff;
+}
+
+.entry-content p a.btn:hover, .entry-content li a.btn:hover{
+    border: 1px solid #333;
+}
+
 .entry-content img {
     max-width: 100%;
     height: auto;
@@ -1004,11 +1022,13 @@ header .page-heading .subheading-challenge-secondary {
     margin-left: auto;
     margin-right: auto;
 }
+
 .silentlogo{
     filter: gray; /* IE6-9 */
     filter: grayscale(1); /* Firefox 35+ */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
 }
+
 .silentlogo:hover{
   filter: none;
   -webkit-filter: grayscale(0);
@@ -1095,8 +1115,6 @@ a.text:hover{
 #menuitem-list-main li.dropdown-header{
     display: block;
     padding-top: 18px;
-    /*padding-left: 8px;
-    padding-right: 8px;*/
     margin-left: -16px;
 }
 #page-navbar{
@@ -1105,8 +1123,6 @@ a.text:hover{
 #page-navbar a.page-scroll{
     padding-left: 8px;
     padding-right: 8px;
-    /*padding-top: 18px;
-    margin-bottom: -3px;*/
 }
 .navbar-nav > li > a {
     line-height: 1.42857;
@@ -1118,3 +1134,5 @@ a.text:hover{
 .publication-item a.btn {
     border: 1px solid transparent;
 }
+
+.tooltip > .tooltip-inner { background-color: #1A1A1A; }
