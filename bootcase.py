@@ -33,8 +33,13 @@ def load_yaml(filename):
     import yaml
 
     if os.path.exists(filename):
-        with open(filename, 'r') as yaml_file:
-            return yaml.load(yaml_file)
+        from distutils.version import LooseVersion
+        if LooseVersion(str(yaml.__version__)) >= "5.1":
+            with open(filename, 'r') as yaml_file:
+                return yaml.load(yaml_file, Loader=yaml.FullLoader)
+        else:
+            with open(filename, 'r') as yaml_file:
+                return yaml.load(yaml_file)
     else:
         return {}
 
