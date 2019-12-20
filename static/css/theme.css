@@ -604,6 +604,9 @@ fieldset[disabled] .btn-inverse.active {
 .label-warning-muted{
     background-color: #f3bc70;
 }
+.label-task1{
+    background-color: #9db516;
+}
 
 
 /* social buttons */
