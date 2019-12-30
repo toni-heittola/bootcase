@@ -607,6 +607,9 @@ fieldset[disabled] .btn-inverse.active {
 .label-task1{
     background-color: #9db516;
 }
+.text-task1{
+    color: #9db516;
+}
 
 
 /* social buttons */
