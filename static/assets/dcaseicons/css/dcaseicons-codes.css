@@ -1,4 +1,5 @@
 
+.dc-captioning:before { content: '\e800'; } /* '' */
 .dc-scene:before { content: '\e801'; } /* '' */
 .dc-tags:before { content: '\e802'; } /* '' */
 .dc-localization:before { content: '\e803'; } /* '' */
