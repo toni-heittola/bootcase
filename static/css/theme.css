@@ -610,6 +610,16 @@ fieldset[disabled] .btn-inverse.active {
 .text-task1{
     color: #9db516;
 }
+.btn-task1{
+    color: #fff;
+    background-color: #9db516;
+    border-color: #809413;
+}
+.btn-task1:hover{
+    color: #fff;
+    background-color: #94ab15;
+    border-color: #9db516;
+}
 
 /* social buttons */
 .social-buttons img{
