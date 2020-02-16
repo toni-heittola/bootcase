@@ -1151,3 +1151,7 @@ a.text:hover{
 .publication-item a.btn {
     border: 1px solid transparent;
 }
+
+.sep-left {
+    border-left: 2px solid #666 !important;
+}
