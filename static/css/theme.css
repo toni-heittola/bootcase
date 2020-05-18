@@ -611,6 +611,9 @@ fieldset[disabled] .btn-inverse.active {
 .text-task1{
     color: #9db516;
 }
+.panel-task1{
+    color: #9db516;
+}
 .btn-task1{
     color: #fff;
     background-color: #9db516;
