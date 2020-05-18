@@ -47,7 +47,6 @@
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments/{{ PYGMENTS_STYLE|default('native') }}.css" type="text/css"/>
     {% endif %}
     {% if 'assets' in THEME_SETTINGS and 'highlight' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['highlight'] %}
-        {{THEME_SETTINGS['highlight_theme']}}
         {% if 'highlight_theme' in THEME_SETTINGS %}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/highlight/styles/{{THEME_SETTINGS['highlight_theme']}}.css" type="text/css"/>
         {% else %}
