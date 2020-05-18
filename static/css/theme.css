@@ -1194,3 +1194,18 @@ a.text:hover{
 .font120 {font-size: 120%;}
 .font130 {font-size: 130%;}
 .font140 {font-size: 140%;}
+
+.tab4{tab-size: 4;-moz-tab-size: 4;}
+.tab6{tab-size: 6;-moz-tab-size: 6;}
+.tab8{tab-size: 8;-moz-tab-size: 8;}
+.tab10{tab-size: 10;-moz-tab-size: 10;}
+.tab12{tab-size: 12;-moz-tab-size: 12;}
+.tab14{tab-size: 14;-moz-tab-size: 14;}
+.tab16{tab-size: 16;-moz-tab-size: 16;}
+.tab18{tab-size: 18;-moz-tab-size: 18;}
+.tab20{tab-size: 20;-moz-tab-size: 20;}
+.tab22{tab-size: 22;-moz-tab-size: 22;}
+.tab24{tab-size: 24;-moz-tab-size: 24;}
+.tab26{tab-size: 26;-moz-tab-size: 26;}
+.tab28{tab-size: 28;-moz-tab-size: 28;}
+.tab30{tab-size: 30;-moz-tab-size: 30;}
