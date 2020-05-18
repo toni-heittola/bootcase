@@ -611,8 +611,13 @@ fieldset[disabled] .btn-inverse.active {
 .text-task1{
     color: #9db516;
 }
-.panel-task1{
-    color: #9db516;
+.panel-task1 {
+    border-color: #c4e21c;
+}
+.panel-task1 > .panel-heading {
+    color: #5b690d;
+    border-color: #dfe7b4;
+    background-color: #dfe7b4;
 }
 .btn-task1{
     color: #fff;
@@ -623,6 +628,15 @@ fieldset[disabled] .btn-inverse.active {
     color: #fff;
     background-color: #94ab15;
     border-color: #9db516;
+}
+
+.panel-primary {
+    border-color: #71a7d4;
+}
+.panel-primary > .panel-heading {
+    color: #265985;
+    background-color: #91b7d7;
+    border-color: #91b7d7;
 }
 
 /* social buttons */
