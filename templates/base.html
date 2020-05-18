@@ -128,7 +128,10 @@
 {% endif %}
 {% if 'assets' in THEME_SETTINGS and 'highlight' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['highlight'] %}
 <script type="text/javascript" src="{{ SITEURL }}/theme/assets/highlight/highlight.pack.js"></script>
-<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+    document.querySelectorAll('pre code:not([class])').forEach(function($) {$.className = 'no-highlight';});
+    hljs.initHighlightingOnLoad();
+</script>
 {% endif %}
 <script type="text/javascript" src="{{ SITEURL }}/theme/js/respond.min.js"></script>
 {% if article and article.scripts %}{% for script in article.scripts %}
