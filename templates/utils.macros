@@ -81,7 +81,7 @@
     <li class="divider" role="presentation"></li>
 
     {%- elif 'header' in item_dict and item_dict['header'] -%}
-    <li class="disabled" {% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
+    <li class="disabled subheader" {% if tooltip %} data-toggle="tooltip" data-placement="{{tooltip_placement}}" title="{{tooltip_text}}"{% endif %}>
         <a>{{title}}</a>
     </li>
 

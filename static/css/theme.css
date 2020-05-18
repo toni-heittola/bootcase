@@ -1183,3 +1183,9 @@ a.text:hover{
 .sep-left {
     border-left: 2px solid #666 !important;
 }
+
+.navbar-inverse .navbar-nav > .subheader > a,
+.navbar-inverse .navbar-nav > .subheader > a:focus,
+.navbar-inverse .navbar-nav > .subheader > a:hover {
+    color: #e3e3e3;
+}
