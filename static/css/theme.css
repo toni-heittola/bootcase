@@ -1189,3 +1189,8 @@ a.text:hover{
 .navbar-inverse .navbar-nav > .subheader > a:hover {
     color: #e3e3e3;
 }
+
+.font110 {font-size: 110%;}
+.font120 {font-size: 120%;}
+.font130 {font-size: 130%;}
+.font140 {font-size: 140%;}
