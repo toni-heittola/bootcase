@@ -46,6 +46,14 @@
     {% if 'assets' in THEME_SETTINGS and 'pygments' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['pygments'] %}
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/pygments/{{ PYGMENTS_STYLE|default('native') }}.css" type="text/css"/>
     {% endif %}
+    {% if 'assets' in THEME_SETTINGS and 'highlight' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['highlight'] %}
+        {{THEME_SETTINGS['highlight_theme']}}
+        {% if 'highlight_theme' in THEME_SETTINGS %}
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/highlight/styles/{{THEME_SETTINGS['highlight_theme']}}.css" type="text/css"/>
+        {% else %}
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/highlight/styles/default.css" type="text/css"/>
+        {% endif %}
+    {% endif %}
     {% if article %}{% if article.styles %}{% for style in article.styles %}
     {{ style }}
     {% endfor %}{% endif %}{% endif %}
@@ -118,6 +126,10 @@
 {% if 'assets' in THEME_SETTINGS and 'audio' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['audio'] %}
 <script type="text/javascript" src="{{ SITEURL }}/theme/assets/audio/js/audio.min.js"></script>
 <script type="text/javascript" src="{{ SITEURL }}/theme/js/setup.audio.js"></script>
+{% endif %}
+{% if 'assets' in THEME_SETTINGS and 'highlight' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['highlight'] %}
+<script type="text/javascript" src="{{ SITEURL }}/theme/assets/highlight/highlight.pack.js"></script>
+<script type="text/javascript">hljs.initHighlightingOnLoad();</script>
 {% endif %}
 <script type="text/javascript" src="{{ SITEURL }}/theme/js/respond.min.js"></script>
 {% if article and article.scripts %}{% for script in article.scripts %}

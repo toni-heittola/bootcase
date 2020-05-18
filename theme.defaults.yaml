@@ -6,6 +6,11 @@ site:
   favicon_ie: false
   apple_touch_icon: false
 
+  # Misc settings
+  web_fonts: https://fonts.googleapis.com/css?family=Heebo:900
+  google_analytics_tracking_id: false
+  custom_css: false
+
 # Assets settings
 assets:
   fontawesome: true
@@ -18,14 +23,13 @@ assets:
   scrollreveal: true
   anijs: false
   pygments: false
+  highlight: false
 
 # Bootstrap settings
 bootstrap-theme: false
 
-# Misc settings
-web_fonts: https://fonts.googleapis.com/css?family=Heebo:900
-google_analytics_tracking_id: false
-custom_css: false
+# Highlight settings
+highlight_theme: default
 
 # Menu settings
 menu:
