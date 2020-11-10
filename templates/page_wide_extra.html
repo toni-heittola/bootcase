@@ -1,0 +1,16 @@
+{% extends "page.html" %}
+{% block content %}
+{% include 'includes/page_header.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 content">
+            <section id="content" class="body">
+                <div class="entry-content">
+                    {{ page.content }}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
