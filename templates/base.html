@@ -53,12 +53,22 @@
         <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/highlight/styles/default.css" type="text/css"/>
         {% endif %}
     {% endif %}
-    {% if article %}{% if article.styles %}{% for style in article.styles %}
+    {% if article %}
+    {% if article.css %}
+    <link rel="stylesheet" href="{{ article.css }}" type="text/css"/>
+    {% endif %}
+    {% if article.styles %}{% for style in article.styles %}
     {{ style }}
-    {% endfor %}{% endif %}{% endif %}
-    {% if page %}{% if page.styles %}{% for style in page.styles %}
+    {% endfor %}{% endif %}
+    {% endif %}
+    {% if page %}
+    {% if page.css %}
+    <link rel="stylesheet" href="{{ page.css }}" type="text/css"/>
+    {% endif %}
+    {% if page.styles %}{% for style in page.styles %}
     {{ style }}
-    {% endfor %}{% endif %}{% endif %}
+    {% endfor %}{% endif %}
+    {% endif %}
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/theme.css" type="text/css"/>
     {% if 'site' in THEME_SETTINGS and 'custom_css' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['custom_css'] %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_SETTINGS['site']['custom_css'] }}" type="text/css"/>
