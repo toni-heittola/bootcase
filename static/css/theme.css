@@ -117,19 +117,19 @@ a h1, a h2, a h3, a h4, a h5, a h6, a .h1, a .h2, a .h3, a .h4, a .h5, a .h6{
 a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:hover h6, a:hover .h1, a:hover .h2, a:hover .h3, a:hover .h4, a:hover .h5, a:hover .h6{
     color: rgb(51,51,51);
 }
-.text-white{color:white !important;}
-.text-muted{color:#999999 !important;}
-.text-muted2{color:#BBBBBB !important;}
-.text-primary{color:#008cba !important;}
-a.text-primary:hover{color:#006687 !important;}
-.text-success{color:#43ac6a !important;}
-a.text-success:hover{color:#358753 !important;}
-.text-info{color:#5bc0de !important;}
-a.text-info:hover{color:#31b0d5 !important;}
-.text-warning{color:#e99002 !important;}
-a.text-warning:hover{color:#b67102 !important;}
-.text-danger{color:#f04124 !important;}
-a.text-danger:hover{color:#d32a0e !important;}
+.text-white{color:white;}
+.text-muted{color:#999999;}
+.text-muted2{color:#BBBBBB;}
+.text-primary{color:#008cba;}
+a.text-primary:hover{color:#006687;}
+.text-success{color:#43ac6a;}
+a.text-success:hover{color:#358753;}
+.text-info{color:#5bc0de;}
+a.text-info:hover{color:#31b0d5;}
+.text-warning{color:#e99002;}
+a.text-warning:hover{color:#b67102;}
+.text-danger{color:#f04124;}
+a.text-danger:hover{color:#d32a0e;}
 .bg-primary{color:#fff;background-color:#008cba}
 a.bg-primary:hover{background-color:#006687}
 .bg-success{background-color:#dff0d8}
@@ -140,11 +140,11 @@ a.bg-info:hover{background-color:#afd9ee}
 a.bg-warning:hover{background-color:#f7ecb5}
 .bg-danger{background-color:#f2dede}
 a.bg-danger:hover{background-color:#e4b9b9}
-.text-primary-50{color:#008cba80 !important;}
-.text-success-50{color:#43ac6a80 !important;}
-.text-info-50{color:#5bc0de80 !important;}
-.text-warning-50{color:#e9900280 !important;}
-.text-danger-50{color:#f0412480 !important;}
+.text-primary-50{color:#008cba80}
+.text-success-50{color:#43ac6a80}
+.text-info-50{color:#5bc0de80}
+.text-warning-50{color:#e9900280}
+.text-danger-50{color:#f0412480}
 .lead{
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #6f6f6f;
@@ -1097,6 +1097,9 @@ a.text{
 a.text:hover{
     border-bottom: 1px dotted !important;
 }
+.text-white a.text{color:white;}
+.text-muted a.text{color:#999999;}
+.text-muted2 a.text{color:#BBBBBB;}
 
 .well-light{
     background-color: #FAFAFA;
