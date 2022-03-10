@@ -605,30 +605,56 @@ fieldset[disabled] .btn-inverse.active {
 .label-warning-muted{
     background-color: #f3bc70;
 }
-.label-task1{
+.label-task1, .label-task1a{
     background-color: #9db516;
 }
-.text-task1{
+.text-task1, .text-task1a{
     color: #9db516;
 }
-.panel-task1 {
+.panel-task1, .panel-task1a {
     border-color: #c4e21c;
 }
-.panel-task1 > .panel-heading {
+.panel-task1 > .panel-heading, .panel-task1a > .panel-heading {
     color: #5b690d;
     border-color: #dfe7b4;
     background-color: #dfe7b4;
 }
-.btn-task1{
+.btn-task1, .btn-task1a{
     color: #fff;
     background-color: #9db516;
     border-color: #809413;
 }
-.btn-task1:hover{
+.btn-task1:hover, .btn-task1a:hover{
     color: #fff;
     background-color: #94ab15;
     border-color: #9db516;
 }
+
+.label-task1b{
+    background-color: #cbd978;
+}
+.text-task1b{
+    color: #cbd978;
+}
+.panel-task1b {
+    border-color: #cbd978;
+}
+.panel-task1b > .panel-heading {
+    color: #cbd978;
+    border-color: #dfe7b4;
+    background-color: #dfe7b4;
+}
+.btn-task1b{
+    color: #fff;
+    background-color: #cbd978;
+    border-color: #809413;
+}
+.btn-task1b:hover{
+    color: #fff;
+    background-color: #cbd978;
+    border-color: #9db516;
+}
+
 
 .panel-primary {
     border-color: #71a7d4;
