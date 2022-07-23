@@ -29,19 +29,40 @@ def merge(target, override):
     return target
 
 
-def load_yaml(filename):
+def str_replace_nested_dict(data, target, new_value):
+    if isinstance(data, str):
+        return data.replace(target, new_value)
+
+    elif isinstance(data, dict):
+        return {k: str_replace_nested_dict(v, target, new_value) for k, v in data.items()}
+
+    elif isinstance(data, list):
+        return [str_replace_nested_dict(v, target, new_value) for v in data]
+
+    else:
+        return data
+
+
+def load_yaml(filename, constants=None):
     import yaml
 
+    data = None
     if os.path.exists(filename):
         from distutils.version import LooseVersion
         if LooseVersion(str(yaml.__version__)) >= "5.1":
             with open(filename, 'r') as yaml_file:
-                return yaml.load(yaml_file, Loader=yaml.FullLoader)
+                data = yaml.load(yaml_file, Loader=yaml.FullLoader)
         else:
             with open(filename, 'r') as yaml_file:
-                return yaml.load(yaml_file)
-    else:
-        return {}
+                data = yaml.load(yaml_file)
+
+    if constants:
+        d = data
+        for target in constants:
+            d = str_replace_nested_dict(data=d, target=target, new_value=constants[target])
+        data = d
+
+    return data
 
 
 def apply_theme_defaults(theme_path, user_settings):
