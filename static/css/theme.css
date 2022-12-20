@@ -605,6 +605,7 @@ fieldset[disabled] .btn-inverse.active {
 .label-warning-muted{
     background-color: #f3bc70;
 }
+
 .label-task1, .label-task1a{
     background-color: #9db516;
 }
@@ -654,6 +655,32 @@ fieldset[disabled] .btn-inverse.active {
     background-color: #cbd978;
     border-color: #9db516;
 }
+
+.label-task2, .label-task2a{
+    background-color: #16b5b5;
+}
+.text-task2, .text-task2a{
+    color: #16b5b5;
+}
+.panel-task2, .panel-task2a {
+    border-color: #129b9b;
+}
+.panel-task2 > .panel-heading, .panel-task2a > .panel-heading {
+    color: #129b9b;
+    border-color: #17cece;
+    background-color: #1adada;
+}
+.btn-task2, .btn-task2a{
+    color: #fff;
+    background-color: #16b5b5;
+    border-color: #129b9b;
+}
+.btn-task2:hover, .btn-task2a:hover{
+    color: #fff;
+    background-color: #17bebe;
+    border-color: #16b5b5;
+}
+
 
 
 .panel-primary {
