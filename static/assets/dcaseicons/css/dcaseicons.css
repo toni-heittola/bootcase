@@ -62,7 +62,7 @@
 .dc-events:before { content: '\e805'; } /* '' */
 .dc-large-scale:before { content: '\e806'; } /* '' */
 .dc-urban:before { content: '\e807'; } /* '' */
-.dc-bird:before { content: '\e808'; } /* '' */
+.dc-bird:before { content: '\e808'; font-size: 0.8em;} /* '' */
 .dc-synthesis:before { content: '\e809'; } /* '' */
 .dc-alarm:before { content: '\f0f3'; } /* '' */
 .dc-synthetic:before { content: '\f1de'; } /* '' */
