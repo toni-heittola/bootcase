@@ -87,6 +87,12 @@
       "css": "captioning",
       "code": 59392,
       "src": "typicons"
+    },
+    {
+      "uid": "76857a03fbaa6857fe063b6c25aa98ed",
+      "css": "synthesis",
+      "code": 59401,
+      "src": "fontawesome"
     }
   ]
 }
