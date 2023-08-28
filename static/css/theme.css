@@ -1265,3 +1265,8 @@ a.text:hover{
 .tab26{tab-size: 26;-moz-tab-size: 26;}
 .tab28{tab-size: 28;-moz-tab-size: 28;}
 .tab30{tab-size: 30;-moz-tab-size: 30;}
+
+
+table.table-borderless td,table.table-borderless th{
+    border: none !important;
+}
