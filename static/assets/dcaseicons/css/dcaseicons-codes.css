@@ -9,5 +9,9 @@
 .dc-urban:before { content: '\e807'; } /* '' */
 .dc-bird:before { content: '\e808'; } /* '' */
 .dc-synthesis:before { content: '\e809'; } /* '' */
+.dc-text:before { content: '\e80a'; } /* '' */
+.dc-separation:before { content: '\e80b'; } /* '' */
+.dc-traffic:before { content: '\e80c'; } /* '' */
+.dc-retrieval:before { content: '\e80d'; } /* '' */
 .dc-alarm:before { content: '\f0f3'; } /* '' */
 .dc-synthetic:before { content: '\f1de'; } /* '' */
