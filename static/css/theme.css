@@ -1267,10 +1267,10 @@ header .page-heading .subheading-challenge-secondary {
 }
 
 .dcase-icon-bottom-text{
-  font-style: bold;
+  font-weight: bold;
   font-size: 25%;
   color: white;
-  margin-top: 2.5em;
+  margin-top: 2.7em;
 }
 .icon-text{
   color: white;
