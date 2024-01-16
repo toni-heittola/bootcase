@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/academicons/css/academicons.min.css" type="text/css"/>
     {% endif %}
     {% if 'assets' in THEME_SETTINGS and 'dcaseicons' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['dcaseicons'] %}
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/dcaseicons/css/dcaseicons.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/dcaseicons/css/dcaseicons.css?v=1.1" type="text/css"/>
     {% endif %}
     {% if 'assets' in THEME_SETTINGS and 'colorbox' in THEME_SETTINGS['assets'] and THEME_SETTINGS['assets']['colorbox'] %}
     <link rel="stylesheet" href="{{ SITEURL }}/theme/assets/colorbox/css/colorbox.css" type="text/css"/>
@@ -69,7 +69,7 @@
     {{ style }}
     {% endfor %}{% endif %}
     {% endif %}
-    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/theme.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/css/theme.css?v=1.1" type="text/css"/>
     {% if 'site' in THEME_SETTINGS and 'custom_css' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['custom_css'] %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_SETTINGS['site']['custom_css'] }}" type="text/css"/>
     {% endif %}
