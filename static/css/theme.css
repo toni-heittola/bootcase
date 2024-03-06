@@ -1438,7 +1438,17 @@ a.text:hover{
 .tab28{tab-size: 28;-moz-tab-size: 28;}
 .tab30{tab-size: 30;-moz-tab-size: 30;}
 
-
 table.table-borderless td,table.table-borderless th{
     border: none !important;
+}
+
+.navbar-tighter > li > a {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.navbar-tighter > li > a > .fa::before {
+    margin-right: 2px !important;
+}
+.navbar-tighter > .subheader > a {
+    padding-left: 0px;
 }
