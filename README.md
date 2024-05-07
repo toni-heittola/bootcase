@@ -3,18 +3,26 @@ bootcase - Pelican theme
 
 `bootcase` is Pelican Bootstrap based theme designed for academic community sites and academic personal sites. Theme is made for Pelican v3.7.1 and Bootstrap v3.3.7.
 
-Originally the theme was developed for [DCASE2016](http://www.cs.tut.fi/sgn/arg/dcase2016/) and [DCASE2017](http://www.cs.tut.fi/sgn/arg/dcase2017/) sites, but it should be useful for other similar projects. Theme is favoring a basic and minimalistic Bootstrap layout with minimal modifications through CSS. Theme implements content and sidebar (left-hand side) type of layout. Theme supports categorization of the pages under sub-directories allowing each of these "sub-site" to have a different color scheme to help user to keep track of his/her location within the site. 
+Originally, the theme was developed for [DCASE](https://dcase.community/) site, but it should be helpful in other similar projects. The theme favours a basic and minimalistic Bootstrap layout with minimal modifications through CSS. Theme implements content and sidebar (left-hand side) type of layout. Theme supports categorising the pages under sub-directories, allowing each of these "sub-sites" to have a different color scheme to help the user track his/her location within the site. 
 
-Left-hand side sidebar is used to show extra information. Theme is designed to work with following plugins:
+The left-hand side sidebar is used to show extra information. The theme is designed to work with the following plugins:
 
 - `pelican-bdates` -- Plugin to generate important dates listings, [GitHub](https://github.com/toni-heittola/pelican-bdates)      
-- `pelican-bpersonnel` -- Plugin to generate personnel listings, [GitHub](https://github.com/toni-heittola/pelican-bpersonnel)
 - `pelican-bnews` -- Plugin to generate most recent article listings, [GitHub](https://github.com/toni-heittola/pelican-bnews)
+- `pelican-bpersonnel` -- Plugin to generate personnel listings, [GitHub](https://github.com/toni-heittola/pelican-bpersonnel)
 - `pelican-brepository` -- Plugin to generate file repository listings and items  [GitHub](https://github.com/toni-heittola/pelican-brepository)
 - `pelican-bsponsors` -- Plugin to generate sponsor listings, [GitHub](https://github.com/toni-heittola/pelican-bsponsors)
 - `pelican-btoc` -- Plugin to generate table of content, [GitHub](https://github.com/toni-heittola/pelican-btoc)
 
 If these plugins are activated, their per page content will be shown in the sidebar. 
+
+Additional plugins that are developed to work with the theme:
+
+- `pelican-btex` -- Plugin to generate bibliography, [GitHub](https://github.com/toni-heittola/pelican-btex)
+- `pelican-bglossary` -- Plugin to generate glossary, [GitHub](https://github.com/toni-heittola/pelican-bglossary)
+- `pelican-datatable` -- Plugin to generate data tables, [GitHub](https://github.com/toni-heittola/pelican-datatable)
+- `pelican-include` -- Plugin to fetch file content, [GitHub](https://github.com/toni-heittola/pelican-include)
+- `pelican-modified` -- Plugin to fetch file modification time, [GitHub](https://github.com/toni-heittola/pelican-modified)
 
 **Author**
 
