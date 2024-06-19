@@ -1443,8 +1443,8 @@ table.table-borderless td,table.table-borderless th{
 }
 
 .navbar-tighter > li > a {
-    padding-left: 6px !important;
-    padding-right: 6px !important;
+    padding-left: 4px !important;
+    padding-right: 5px !important;
 }
 .navbar-tighter > li > a > .fa::before {
     margin-right: 2px !important;
