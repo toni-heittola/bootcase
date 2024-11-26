@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="{{ self.title() }}" />
     {% if 'site' in THEME_SETTINGS and 'favicon' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['favicon'] %}
     <link href="{{ SITEURL }}/{{ THEME_SETTINGS['site']['favicon'] }}" rel="icon">
     {% endif %}
@@ -19,6 +20,11 @@
     {% endblock %}
     {% block meta %}
     <meta name="author" content="{{ AUTHOR }}" />
+    {% if ABSOLUTE_URL %}
+    <meta property="og:url" content="{{ ABSOLUTE_URL }}" />
+    {% elif SITEURL %}
+    <meta property="og:url" content="{{ SITEURL }}" />
+    {% endif %}
     {% endblock %}
     {% if 'site' in THEME_SETTINGS and 'web_fonts' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['web_fonts'] %}
     <link href="{{ THEME_SETTINGS['site']['web_fonts'] }}" rel="stylesheet">
