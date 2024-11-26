@@ -35,7 +35,8 @@ To install bootcase, copy theme files under `theme/bootcase/` directory and in `
     THEME = 'themes/bootcase/'
 
 Additional parameters to set:
-
+    
+    ABSOLUTE_URL = 'https://test.site'
     DIRECT_TEMPLATES = ['news']
     PAGE_URL = '{slug}'
     PAGE_SAVE_AS = '{slug}.html'
@@ -143,7 +144,8 @@ Set in `THEME_SETTINGS['site']`:
 | favicon          | false         | Path to favicon, or false if none set                  |
 | favicon_ie       | false         | Path to IE specific favicon, or false if none set.     |
 | apple_touch_icon | false         | Path to touch icon, or false if none set.              |
-    
+| default_link_preview_image | empty | Path to default preview image used for when link to the site are shared in social media |
+
 ## Assets settings
 
 Set in `THEME_SETTINGS['assets']`:
@@ -249,9 +251,10 @@ Pages from main-level are set through sub-site label `THEME_SETTINGS['page_subst
 
 Each article can have separate styling through file metadata. Parameters supported for article:
 
-| parameter label     | type          | description                                                                    |
-| ------------------  | ------------- | ------------------------------------------------------------------------------ |
-| HeaderImage         | string        | Path to image                                                                  |  
+| parameter label     | type          | description                                          |
+| ------------------  | ------------- |------------------------------------------------------|
+| HeaderImage         | string        | Path to image                                        |  
+| LinkPreviewImage    | string        | Path to image used as link preview in social media   |
 
 Each static page can have separate styling through file metadata. Example:
 
@@ -264,6 +267,7 @@ Each static page can have separate styling through file metadata. Example:
     HeaderTextSecondary: Extra header text (secondary)    
     HeaderImage: theme::everyday-patterns/wall-granada-02.jpg
     HeaderOverlay: images/overlay.svg    
+    LinkPreviewImage: images/link_image.png
 
 Parameters supported for static page:
 

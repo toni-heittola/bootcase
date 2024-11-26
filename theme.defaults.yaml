@@ -11,6 +11,7 @@ site:
   google_analytics_tracking_id: false
   custom_css: false
 
+  default_link_preview_image:
 # Assets settings
 assets:
   fontawesome: true
