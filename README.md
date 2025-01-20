@@ -3,26 +3,18 @@ bootcase - Pelican theme
 
 `bootcase` is Pelican Bootstrap based theme designed for academic community sites and academic personal sites. Theme is made for Pelican v3.7.1 and Bootstrap v3.3.7.
 
-Originally, the theme was developed for [DCASE](https://dcase.community/) site, but it should be helpful in other similar projects. The theme favours a basic and minimalistic Bootstrap layout with minimal modifications through CSS. Theme implements content and sidebar (left-hand side) type of layout. Theme supports categorising the pages under sub-directories, allowing each of these "sub-sites" to have a different color scheme to help the user track his/her location within the site. 
+Originally the theme was developed for [DCASE2016](http://www.cs.tut.fi/sgn/arg/dcase2016/) and [DCASE2017](http://www.cs.tut.fi/sgn/arg/dcase2017/) sites, but it should be useful for other similar projects. Theme is favoring a basic and minimalistic Bootstrap layout with minimal modifications through CSS. Theme implements content and sidebar (left-hand side) type of layout. Theme supports categorization of the pages under sub-directories allowing each of these "sub-site" to have a different color scheme to help user to keep track of his/her location within the site. 
 
-The left-hand side sidebar is used to show extra information. The theme is designed to work with the following plugins:
+Left-hand side sidebar is used to show extra information. Theme is designed to work with following plugins:
 
 - `pelican-bdates` -- Plugin to generate important dates listings, [GitHub](https://github.com/toni-heittola/pelican-bdates)      
-- `pelican-bnews` -- Plugin to generate most recent article listings, [GitHub](https://github.com/toni-heittola/pelican-bnews)
 - `pelican-bpersonnel` -- Plugin to generate personnel listings, [GitHub](https://github.com/toni-heittola/pelican-bpersonnel)
+- `pelican-bnews` -- Plugin to generate most recent article listings, [GitHub](https://github.com/toni-heittola/pelican-bnews)
 - `pelican-brepository` -- Plugin to generate file repository listings and items  [GitHub](https://github.com/toni-heittola/pelican-brepository)
 - `pelican-bsponsors` -- Plugin to generate sponsor listings, [GitHub](https://github.com/toni-heittola/pelican-bsponsors)
 - `pelican-btoc` -- Plugin to generate table of content, [GitHub](https://github.com/toni-heittola/pelican-btoc)
 
 If these plugins are activated, their per page content will be shown in the sidebar. 
-
-Additional plugins that are developed to work with the theme:
-
-- `pelican-btex` -- Plugin to generate bibliography, [GitHub](https://github.com/toni-heittola/pelican-btex)
-- `pelican-bglossary` -- Plugin to generate glossary, [GitHub](https://github.com/toni-heittola/pelican-bglossary)
-- `pelican-datatable` -- Plugin to generate data tables, [GitHub](https://github.com/toni-heittola/pelican-datatable)
-- `pelican-include` -- Plugin to fetch file content, [GitHub](https://github.com/toni-heittola/pelican-include)
-- `pelican-modified` -- Plugin to fetch file modification time, [GitHub](https://github.com/toni-heittola/pelican-modified)
 
 **Author**
 
@@ -35,8 +27,7 @@ To install bootcase, copy theme files under `theme/bootcase/` directory and in `
     THEME = 'themes/bootcase/'
 
 Additional parameters to set:
-    
-    ABSOLUTE_URL = 'https://test.site'
+
     DIRECT_TEMPLATES = ['news']
     PAGE_URL = '{slug}'
     PAGE_SAVE_AS = '{slug}.html'
@@ -90,7 +81,10 @@ Theme default settings are specified in `theme.defaults.yaml`:
     bootstrap-theme: false
 
     # Misc settings
-    web_fonts: https://fonts.googleapis.com/css?family=Heebo:900
+    web_fonts: https://fonts.googleapis.com/css?family=Heebo:900 
+    # Or using newer css2 API, with multiple fonts
+    # web_fonts: https://fonts.googleapis.com/css2?family=Heebo:wght@400;900&family=Roboto:wght@900
+
     google_analytics_tracking_id: false
     custom_css: false
     
@@ -104,11 +98,18 @@ Theme default settings are specified in `theme.defaults.yaml`:
     footer:
       show: true
     
-    # Header defaults
-    header_defaults:
-      article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-      article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-      page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+    # Header
+    header:
+      text_style: bold           # [bold, thin]
+      text_align: right          # [center, right]
+      text_family: Heebo         # Defaults to Heebo if not set. Make sure font is loaded with web_fonts field
+      text_weight: 900           # Make sure font weight is loaded with web_fonts field
+
+      # Header defaults
+      defaults:
+          article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+          article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+          page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
         
     # Article info settings
     article:
@@ -144,8 +145,7 @@ Set in `THEME_SETTINGS['site']`:
 | favicon          | false         | Path to favicon, or false if none set                  |
 | favicon_ie       | false         | Path to IE specific favicon, or false if none set.     |
 | apple_touch_icon | false         | Path to touch icon, or false if none set.              |
-| default_link_preview_image | empty | Path to default preview image used for when link to the site are shared in social media |
-
+    
 ## Assets settings
 
 Set in `THEME_SETTINGS['assets']`:
@@ -251,10 +251,9 @@ Pages from main-level are set through sub-site label `THEME_SETTINGS['page_subst
 
 Each article can have separate styling through file metadata. Parameters supported for article:
 
-| parameter label     | type          | description                                          |
-| ------------------  | ------------- |------------------------------------------------------|
-| HeaderImage         | string        | Path to image                                        |  
-| LinkPreviewImage    | string        | Path to image used as link preview in social media   |
+| parameter label     | type          | description                                                                    |
+| ------------------  | ------------- | ------------------------------------------------------------------------------ |
+| HeaderImage         | string        | Path to image                                                                  |  
 
 Each static page can have separate styling through file metadata. Example:
 
@@ -267,7 +266,6 @@ Each static page can have separate styling through file metadata. Example:
     HeaderTextSecondary: Extra header text (secondary)    
     HeaderImage: theme::everyday-patterns/wall-granada-02.jpg
     HeaderOverlay: images/overlay.svg    
-    LinkPreviewImage: images/link_image.png
 
 Parameters supported for static page:
 
@@ -277,6 +275,4 @@ Parameters supported for static page:
 | HeaderOverlay       | string        | Path to overlay image. This can be SVG file or image file.                     |
 | HeaderText          | string        | Header extra text.                                                             |
 | HeaderTextSecondary | string        | Secondary extra text for header.                                               |
-
-
 
