@@ -13,5 +13,8 @@
 .dc-separation:before { content: '\e80b'; } /* '' */
 .dc-traffic:before { content: '\e80c'; } /* '' */
 .dc-retrieval:before { content: '\e80d'; } /* '' */
+.dc-audio-question-answer:before { content: '\e80e'; } /* '' */
+.dc-question-answer:before { content: '\e80f'; } /* '' */
+.dc-segmenting:before { content: '\e810'; } /* '' */
 .dc-alarm:before { content: '\f0f3'; } /* '' */
 .dc-synthetic:before { content: '\f1de'; } /* '' */
