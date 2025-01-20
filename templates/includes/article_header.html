@@ -38,6 +38,27 @@
     {% set header_image = THEME_SETTINGS['header']['defaults']['article_background_image'] %}
 {%- endif -%}
 
+{%- if 'header' in THEME_SETTINGS and 'text_family' in THEME_SETTINGS['header'] -%}
+    <style>
+        header .page-heading h1, header .page-heading-portal h1{
+            font-family: '{{THEME_SETTINGS['header']['text_family']}}', 'PT Sans Caption', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        header .page-heading .bold{
+            font-family: '{{THEME_SETTINGS['header']['text_family']}}', 'PT Sans Caption', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    </style>
+{%- endif -%}
+{%- if 'header' in THEME_SETTINGS and 'text_weight' in THEME_SETTINGS['header'] -%}
+    <style>
+        header .page-heading h1, header .page-heading-portal h1{
+            font-weight: {{THEME_SETTINGS['header']['text_weight']}};
+        }
+        header .page-heading .bold{
+            font-weight: {{THEME_SETTINGS['header']['text_weight']}};
+        }
+    </style>
+{%- endif -%}
+
 {%- if header_image -%}
     {%- set output_file_parts = output_file.split('/') -%}
     {%- set sub_parts = (output_file_parts | length) - 1 -%}
