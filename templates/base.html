@@ -77,7 +77,13 @@
     {% endif %}
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/theme.css?v=1.1" type="text/css"/>
     {% if 'site' in THEME_SETTINGS and 'custom_css' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['custom_css'] %}
+    {% if THEME_SETTINGS['site']['custom_css'] is iterable and (THEME_SETTINGS['site']['custom_css'] is not string and THEME_SETTINGS['site']['custom_css'] is not mapping) %}
+    {% for custom_css in THEME_SETTINGS['site']['custom_css'] %}
+    <link rel="stylesheet" href="{{ SITEURL }}/{{ custom_css }}" type="text/css"/>
+    {% endfor %}
+    {% else %}
     <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_SETTINGS['site']['custom_css'] }}" type="text/css"/>
+    {% endif %}
     {% endif %}
     <script type="text/javascript" src="{{ SITEURL }}/theme/assets/jquery/jquery.min.js"></script>
     {% if FEED_ALL_ATOM %}
