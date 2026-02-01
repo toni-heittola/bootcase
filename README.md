@@ -81,7 +81,10 @@ Theme default settings are specified in `theme.defaults.yaml`:
     bootstrap-theme: false
 
     # Misc settings
-    web_fonts: https://fonts.googleapis.com/css?family=Heebo:900
+    web_fonts: https://fonts.googleapis.com/css?family=Heebo:900 
+    # Or using newer css2 API, with multiple fonts
+    # web_fonts: https://fonts.googleapis.com/css2?family=Heebo:wght@400;900&family=Roboto:wght@900
+
     google_analytics_tracking_id: false
     custom_css: false
     
@@ -95,11 +98,18 @@ Theme default settings are specified in `theme.defaults.yaml`:
     footer:
       show: true
     
-    # Header defaults
-    header_defaults:
-      article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-      article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
-      page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+    # Header
+    header:
+      text_style: bold           # [bold, thin]
+      text_align: right          # [center, right]
+      text_family: Heebo         # Defaults to Heebo if not set. Make sure font is loaded with web_fonts field
+      text_weight: 900           # Make sure font weight is loaded with web_fonts field
+
+      # Header defaults
+      defaults:
+          article_list_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+          article_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
+          page_background_image: theme::everyday-patterns/bricks-toledo-02.jpg
         
     # Article info settings
     article:

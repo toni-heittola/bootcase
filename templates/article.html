@@ -2,16 +2,35 @@
 {% block title %}{{ article.title|striptags }} - {{ SITENAME }}{% endblock %}
 {% block html_lang %}{{ article.lang }}{% endblock %}
 {% block meta %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:url" content="{{ ABSOLUTE_URL }}/{{ article.url }}" />
+    {% elif SITEURL %}
+    <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
+    {% endif %}
+    {% if article.linkpreviewimage %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:image" content="{{ ABSOLUTE_URL }}/{{article.linkpreviewimage}}" />
+    {% elif SITEURL %}
+    <meta property="og:image" content="{{ SITEURL }}/{{article.linkpreviewimage}}" />
+    {% endif %}
+    {% elif 'site' in THEME_SETTINGS and 'default_link_preview_image' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['default_link_preview_image'] %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:image" content="{{ ABSOLUTE_URL }}/{{THEME_SETTINGS['site']['default_link_preview_image']}}" />
+    {% elif SITEURL %}
+    <meta property="og:image" content="{{ SITEURL }}/{{THEME_SETTINGS['site']['default_link_preview_image']}}" />
+    {% endif %}
+    {% endif %}
     {% if article.author %}
-        <meta name="author" content="{{ article.author }}" />
+    <meta name="author" content="{{ article.author }}" />
     {% else %}
-        <meta name="author" content="{{ AUTHOR }}" />
+    <meta name="author" content="{{ AUTHOR }}" />
     {% endif %}
     {% if article.tags %}
-        <meta name="keywords" content="{{ article.tags|join(',')|striptags }}" />
+    <meta name="keywords" content="{{ article.tags|join(',')|striptags }}" />
     {% endif %}
     {% if article.summary %}
-        <meta name="description" content="{{ article.summary|striptags|escape }}" />
+    <meta name="description" content="{{ article.summary|striptags|escape }}" />
+    <meta name="og:description" content="{{ article.summary|striptags|escape|truncate(62)}}" />
     {% endif %}
 {% endblock %}
 {% block canonical_rel %}

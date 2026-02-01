@@ -2,17 +2,43 @@
 {% block title %}{{ page.title|striptags }} - {{ SITENAME }}{% endblock %}
 {% block html_lang %}{{ page.lang }}{% endblock %}
 {% block meta %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:url" content="{{ ABSOLUTE_URL }}/{{ page.url }}" />
+    {% elif SITEURL %}
+    <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}" />
+    {% endif %}
+    {% if page.linkpreviewimage %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:image" content="{{ ABSOLUTE_URL }}/{{page.linkpreviewimage}}" />
+    {% elif SITEURL %}
+    <meta property="og:image" content="{{ SITEURL }}/{{page.linkpreviewimage}}" />
+    {% endif %}
+    {% elif page_data and 'LinkPreviewImage' in page_data %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:image" content="{{ ABSOLUTE_URL }}/{{page_data['LinkPreviewImage']}}" />
+    {% elif SITEURL %}
+    <meta property="og:image" content="{{ SITEURL }}/{{page_data['LinkPreviewImage']}}" />
+    {% endif %}
+    {% elif 'site' in THEME_SETTINGS and 'default_link_preview_image' in THEME_SETTINGS['site'] and THEME_SETTINGS['site']['default_link_preview_image'] %}
+    {% if ABSOLUTE_URL %}
+    <meta property="og:image" content="{{ ABSOLUTE_URL }}/{{THEME_SETTINGS['site']['default_link_preview_image']}}" />
+    {% elif SITEURL %}
+    <meta property="og:image" content="{{ SITEURL }}/{{THEME_SETTINGS['site']['default_link_preview_image']}}" />
+    {% endif %}
+    {% endif %}
     {% if page.author %}
-        <meta name="author" content="{{ page.author }}" />
+    <meta name="author" content="{{ page.author }}" />
     {% else %}
-        <meta name="author" content="{{ AUTHOR }}" />
+    <meta name="author" content="{{ AUTHOR }}" />
     {% endif %}
     {% if page.summary %}
-        <meta name="description" content="{{ page.summary|striptags|escape }}" />
+    <meta name="description" content="{{ page.summary|striptags|escape }}" />
+    <meta name="og:description" content="{{ page.summary|striptags|escape|truncate(62)}}" />
     {% endif %}
+
 {% endblock %}
 {% block canonical_rel %}
-<link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
+    <link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
 {% endblock %}
 {% block breadcrumbs %}
     {% if DISPLAY_BREADCRUMBS %}

@@ -124,7 +124,7 @@
         {%- if 'menu' in THEME_SETTINGS and 'sub' in THEME_SETTINGS['menu'] and THEME_SETTINGS['menu']['sub'] and sub_site in THEME_SETTINGS['menu']['sub'] -%}
         <div class="row">
              <div id="navbar-sub" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" id="menuitem-list-sub">
+                <ul class="nav navbar-nav navbar-right {% if 'menu_css' in THEME_SETTINGS and 'sub' in THEME_SETTINGS['menu_css'] and THEME_SETTINGS['menu_css']['sub'] and sub_site in THEME_SETTINGS['menu_css']['sub'] %}{{THEME_SETTINGS['menu_css']['sub'][sub_site]}}{% endif %}" id="menuitem-list-sub">
                 {%- for menu_dict in THEME_SETTINGS['menu']['sub'][sub_site] -%}
                 {{ macros.menu_item_processor(item_dict=menu_dict, current_page=current_page, current_title=current_title, site_url=SITEURL, sub_site=sub_site) }}
                 {%- endfor -%}
